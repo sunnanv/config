@@ -37,15 +37,15 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 
-local servers = { 'pyright', 'tsserver' }
+lspconfig['pyright'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-    }
-
-end
+lspconfig['tsserver'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 
 local luasnip = require 'luasnip'
 

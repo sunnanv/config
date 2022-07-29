@@ -9,7 +9,9 @@ while getopts 'o' OPTION; do
 done
 
 
-export CURRENT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+export CURRENT_DIR=$(dirname -- "$( readlink -f -- "$0"; )")
+
+echo $CURRENT_DIR
 
 sudo pacman -S \
 	firefox \

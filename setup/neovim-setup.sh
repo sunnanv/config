@@ -2,7 +2,13 @@ if ! [ -x "$(command -v nvim)" ] || [ $OVERRIDE ]; then
     echo "Setting up Neovim"
     sudo pacman -S neovim typescript pyright gcc --noconfirm
 
-    pip install neovim
+    mkdir -p ~/.local/venv
+    (cd ~/.local/venv && \
+        python3 -m venv nvim && \
+        cd nvim && \
+        . ./bin/activate && \
+        pip install pynvim black && \
+	exit)
 
     npm install -g neovim
 
