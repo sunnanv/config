@@ -22,7 +22,7 @@ sudo pacman -S \
     xclip \
 	--noconfirm
 
-ssh-keygen -q -t ed25519 -C "johannes.sunnan@gmail.com" -N '' ~/.ssh/id_ed25519 <<<y >/dev/null 2>&1
+# ssh-keygen -q -t ed25519 -C "johannes.sunnan@gmail.com" -N '' ~/.ssh/id_ed25519 <<<y >/dev/null 2>&1
 
 ./setup/node-setup.sh
 ./setup/python-setup.sh
