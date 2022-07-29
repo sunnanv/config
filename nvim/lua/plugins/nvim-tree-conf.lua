@@ -1,4 +1,8 @@
-require("nvim-tree").setup{}
+require("nvim-tree").setup{
+    git = {
+        ignore = false
+    }
+}
 
 local map = vim.api.nvim_set_keymap
 
