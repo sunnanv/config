@@ -1,6 +1,11 @@
 if ! [ -x "$(command -v nvim)" ] || [ $OVERRIDE ]; then
     echo "Setting up Neovim"
-    sudo pacman -S neovim typescript pyright gcc --noconfirm
+    if [ "$OS" = "LINUX" ]; then
+        sudo pacman -S neovim typescript pyright gcc --noconfirm
+    fi
+    if [ "$OS" = "MAC" ]; then
+	brew install neovim typescript pyright gcc
+    fi
 
     mkdir -p ~/.local/venv
     (cd ~/.local/venv && \

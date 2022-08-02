@@ -37,7 +37,7 @@ return require('packer').startup({function(use)
     use 'L3MON4D3/LuaSnip'
 
     use 'vim-test/vim-test'
-    use 'Pocco81/AutoSave.nvim'
+    use 'pocco81/auto-save.nvim'
 end,
 config = {
   package_root = vim.fn.stdpath('config') .. '/site/pack'
