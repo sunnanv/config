@@ -6,6 +6,7 @@ require('plugins.lualine')
 require('plugins.lsp')
 require('plugins.vim-test')
 require('plugins.gitsigns')
+require('plugins.dap')
 
 require('nvim-autopairs').setup{}
 

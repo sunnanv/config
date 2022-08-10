@@ -12,7 +12,7 @@ if ! [ -x "$(command -v nvim)" ] || [ $OVERRIDE ]; then
         python3 -m venv nvim && \
         cd nvim && \
         . ./bin/activate && \
-        pip install pynvim black && \
+        pip install pynvim black debugpy && \
 	exit)
 
     npm install -g neovim

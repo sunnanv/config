@@ -37,12 +37,27 @@ return require('packer').startup({function(use)
     use 'L3MON4D3/LuaSnip'
 
     use 'vim-test/vim-test'
+    use {
+      "nvim-neotest/neotest",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "antoinemadec/FixCursorHold.nvim",
+        "haydenmeade/neotest-jest",
+        "nvim-neotest/neotest-python",
+        "nvim-neotest/neotest-vim-test",
+      }
+    }
     use 'pocco81/auto-save.nvim'
 
     use {
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
     }
+
+    use { 'mfussenegger/nvim-dap' }
+    use { 'mfussenegger/nvim-dap-python' }
+
 
 end,
 config = {
