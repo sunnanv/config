@@ -38,6 +38,12 @@ return require('packer').startup({function(use)
 
     use 'vim-test/vim-test'
     use 'pocco81/auto-save.nvim'
+
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+    }
+
 end,
 config = {
   package_root = vim.fn.stdpath('config') .. '/site/pack'
