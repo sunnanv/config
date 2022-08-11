@@ -12,7 +12,7 @@ require('gitsigns').setup {
   watch_gitdir = {
     interval = 1000
   },
-  signcolumn = false,
+  signcolumn = true,
   current_line_blame = false,
   sign_priority = 6,
   update_debounce = 100,
@@ -23,10 +23,9 @@ require('gitsigns').setup {
 }
 
 vim.api.nvim_set_keymap('n', '<leader>gb', ':Gitsigns blame_line<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gb', ':Gitsigns blame_line<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gg', ':Gitsigns toggle_signs<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gi', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>go', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gj', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gk', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gu', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ga', ':Gitsigns stage_hunk<CR>', { noremap = true, silent = true })

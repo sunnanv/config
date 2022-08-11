@@ -54,6 +54,7 @@ return require('packer').startup({function(use)
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
     }
+    use 'tpope/vim-fugitive'
 
     use { 'mfussenegger/nvim-dap' }
     use { 'mfussenegger/nvim-dap-python' }

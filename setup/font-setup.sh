@@ -1,6 +1,5 @@
 
 if [ "$OS" = "MAC" ] ; then
-    echo 'MACMAC'
     FONTS_DIR=~/Library/Fonts
     brew tap homebrew/cask-fonts
     brew install --cask font-jetbrains-mono
