@@ -1,22 +1,24 @@
+DEPENDENCIES="neovim typescript typescript-language-server pyright gcc"
+
+if [ "$OS" = "LINUX" ]; then
+    sudo pacman -S $DEPENDENCIES --noconfirm
+fi
+if [ "$OS" = "MAC" ]; then
+    brew install $DEPENDENCIES
+fi
+
+npm i -g neovim
+
+mkdir -p ~/.local/venv
+(cd ~/.local/venv && \
+    python3 -m venv nvim && \
+    cd nvim && \
+    . ./bin/activate && \
+    pip install pynvim black debugpy && \
+exit)
+
 if ! [ -x "$(command -v nvim)" ] || [ $OVERRIDE ]; then
     echo "Setting up Neovim"
-    if [ "$OS" = "LINUX" ]; then
-        sudo pacman -S neovim typescript pyright gcc --noconfirm
-    fi
-    if [ "$OS" = "MAC" ]; then
-	brew install neovim typescript pyright gcc
-    fi
-
-    mkdir -p ~/.local/venv
-    (cd ~/.local/venv && \
-        python3 -m venv nvim && \
-        cd nvim && \
-        . ./bin/activate && \
-        pip install pynvim black debugpy && \
-	exit)
-
-    npm install -g neovim
-
     mkdir -p "$HOME/.config/nvim"
     ln -fs "$CURRENT_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua"
     ln -fs "$CURRENT_DIR/nvim/lua" "$HOME/.config/nvim/lua"

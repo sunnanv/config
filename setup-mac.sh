@@ -11,22 +11,15 @@ done
 export OS="MAC"
 export CURRENT_DIR=$( cd ${0%/*} && pwd -P )
 
-echo $CURRENT_DIR
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-NONINTERACTIVE=1 brew install --cask \
-	firefox \
-	docker 
+CASKS="firefox docker"
+NONINTERACTIVE=1 brew install --cask $CASKS
 
-NONINTERACTIVE=1 brew install \
-	httpie \
-	zsh \
-	ripgrep \
-	docker-compose
-	
+DEPENDENCIES="httpie zsh ripgrep docker-compose"
+NONINTERACTIVE=1 brew install $DEPENDENCIES
 
-# ssh-keygen -q -t ed25519 -C "johannes.sunnan@gmail.com" -N '' ~/.ssh/id_ed25519 <<<y >/dev/null 2>&1
 
 ./setup/node-setup.sh
 ./setup/python-setup.sh

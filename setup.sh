@@ -11,20 +11,9 @@ done
 
 export CURRENT_DIR=$(dirname -- "$( readlink -f -- "$0"; )")
 
-echo $CURRENT_DIR
+DEPENDENCIES="firefox httpie zsh git ripgrep docker docker-compose xclip"
+sudo pacman -S $DEPENDENCIES --noconfirm
 
-sudo pacman -S \
-	firefox \
-	httpie \
-	zsh \
-	git \
-	ripgrep \
-	docker \
-	docker-compose \
-    xclip \
-	--noconfirm
-
-# ssh-keygen -q -t ed25519 -C "johannes.sunnan@gmail.com" -N '' ~/.ssh/id_ed25519 <<<y >/dev/null 2>&1
 
 ./setup/node-setup.sh
 ./setup/python-setup.sh
