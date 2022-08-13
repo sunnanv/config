@@ -20,6 +20,7 @@ return require('packer').startup({function(use)
 
     use { 'Yggdroot/indentLine' }
     use { 'windwp/nvim-autopairs' }
+    use { 'windwp/nvim-ts-autotag' }
 
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
@@ -59,6 +60,7 @@ return require('packer').startup({function(use)
     use { 'mfussenegger/nvim-dap' }
     use { 'mfussenegger/nvim-dap-python' }
 
+    use { 'sbdchd/neoformat' }
 
 end,
 config = {

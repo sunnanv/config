@@ -7,6 +7,7 @@ require('plugins.lsp')
 require('plugins.vim-test')
 require('plugins.gitsigns')
 require('plugins.dap')
+require('plugins.neoformat')
 
 require('nvim-autopairs').setup{}
 
