@@ -118,3 +118,5 @@ export NVM_DIR="$HOME/.nvm"
 
 PYTHON_USER_PATH="$(python3 -m site --user-base)/bin"
 export PATH="$PATH:$PYTHON_USER_PATH"
+
+alias dev='./dev.sh'

@@ -6,7 +6,6 @@ vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>TestLast<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '<leader>tv', '<cmd>TestVisit<CR>', { noremap = true, silent = true}) -- Test visit
 
 vim.g['test#python#djangotest#options'] = {all = '--keepdb'}
-vim.g['test#strategy'] = 'neovim'
 
 -- local neotest = require('neotest')
 

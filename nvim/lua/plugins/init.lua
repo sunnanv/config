@@ -8,6 +8,10 @@ require('plugins.vim-test')
 require('plugins.gitsigns')
 require('plugins.dap')
 require('plugins.neoformat')
+require('plugins.null-ls')
+require('plugins.telescope')
+require('plugins.projectionist')
+require('plugins.harpoon')
 
 require('nvim-autopairs').setup{}
 

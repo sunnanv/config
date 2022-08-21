@@ -7,7 +7,7 @@ if [ "$OS" = "MAC" ]; then
     brew install $DEPENDENCIES
 fi
 
-npm i -g neovim
+npm i -g neovim vls
 
 mkdir -p ~/.local/venv
 (cd ~/.local/venv && \

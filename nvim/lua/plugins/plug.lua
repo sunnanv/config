@@ -17,6 +17,9 @@ return require('packer').startup({function(use)
         'nvim-telescope/telescope.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
+    use { "nvim-telescope/telescope-file-browser.nvim" }
+
+    use 'ThePrimeagen/harpoon'
 
     use { 'Yggdroot/indentLine' }
     use { 'windwp/nvim-autopairs' }
@@ -25,6 +28,7 @@ return require('packer').startup({function(use)
     use { 'tpope/vim-commentary' }
     use { 'tpope/vim-surround' }
     use { 'machakann/vim-highlightedyank' }
+    use { 'tpope/vim-projectionist' }
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -36,6 +40,7 @@ return require('packer').startup({function(use)
     use 'hrsh7th/cmp-nvim-lsp'
     use 'saadparwaiz1/cmp_luasnip'
     use 'L3MON4D3/LuaSnip'
+    use {'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }}
 
     use 'vim-test/vim-test'
     use {
@@ -51,6 +56,7 @@ return require('packer').startup({function(use)
     }
     use 'pocco81/auto-save.nvim'
 
+    use {"jose-elias-alvarez/null-ls.nvim"}
     use {
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
@@ -61,6 +67,7 @@ return require('packer').startup({function(use)
     use { 'mfussenegger/nvim-dap-python' }
 
     use { 'sbdchd/neoformat' }
+    use { 'udalov/kotlin-vim' }
 
 end,
 config = {

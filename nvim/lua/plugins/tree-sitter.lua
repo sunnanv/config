@@ -12,7 +12,8 @@ require'nvim-treesitter.configs'.setup {
         "sql",
         "typescript",
         "vue",
-        "yaml"
+        "yaml",
+        "kotlin"
     },
     highlight = {
         enable = true,
