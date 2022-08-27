@@ -41,19 +41,11 @@ return require('packer').startup({function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'L3MON4D3/LuaSnip'
     use {'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }}
+    use {'RishabhRD/popfix'}
+    use {'RishabhRD/nvim-lsputils'}
 
     use 'vim-test/vim-test'
-    use {
-      "nvim-neotest/neotest",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-        "haydenmeade/neotest-jest",
-        "nvim-neotest/neotest-python",
-        "nvim-neotest/neotest-vim-test",
-      }
-    }
+    use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
     use 'pocco81/auto-save.nvim'
 
     use {"jose-elias-alvarez/null-ls.nvim"}

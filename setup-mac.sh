@@ -17,7 +17,7 @@ export CURRENT_DIR=$( cd ${0%/*} && pwd -P )
 CASKS="firefox docker"
 NONINTERACTIVE=1 brew install --cask $CASKS
 
-DEPENDENCIES="httpie zsh ripgrep docker-compose"
+DEPENDENCIES="httpie zsh ripgrep docker-compose bat"
 NONINTERACTIVE=1 brew install $DEPENDENCIES
 
 

@@ -15,6 +15,7 @@ local mappings = {
   ['<leader>h4'] = function()
 	  require('harpoon.ui').nav_file(4)
   end,
+  ['<leader>hh'] = require('harpoon.ui').nav_next,
   ['<leader>hj'] = require('harpoon.ui').nav_next,
   ['<leader>hk'] = require('harpoon.ui').nav_prev,
 }

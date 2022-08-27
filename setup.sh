@@ -11,7 +11,7 @@ done
 
 export CURRENT_DIR=$(dirname -- "$( readlink -f -- "$0"; )")
 
-DEPENDENCIES="firefox httpie zsh git ripgrep docker docker-compose xclip"
+DEPENDENCIES="firefox httpie zsh git ripgrep docker docker-compose xclip bat"
 sudo pacman -S $DEPENDENCIES --noconfirm
 
 
