@@ -12,6 +12,7 @@ require('plugins.null-ls')
 require('plugins.telescope')
 require('plugins.projectionist')
 require('plugins.harpoon')
+require('plugins.mind')
 
 require('nvim-autopairs').setup{}
 

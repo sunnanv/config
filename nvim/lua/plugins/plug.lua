@@ -18,6 +18,7 @@ return require('packer').startup({function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { "nvim-telescope/telescope-file-browser.nvim" }
+    use { "nvim-telescope/telescope-frecency.nvim", requires = { "tami5/sqlite.lua" }}
 
     use 'ThePrimeagen/harpoon'
 
@@ -54,12 +55,15 @@ return require('packer').startup({function(use)
       requires = 'nvim-lua/plenary.nvim',
     }
     use 'tpope/vim-fugitive'
+    use 'tpope/vim-abolish'
 
     use { 'mfussenegger/nvim-dap' }
     use { 'mfussenegger/nvim-dap-python' }
 
     use { 'sbdchd/neoformat' }
-    use { 'udalov/kotlin-vim' }
+
+    use { 'phaazon/mind.nvim', branch = 'v2' }
+
 
 end,
 config = {
