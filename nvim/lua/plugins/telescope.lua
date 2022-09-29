@@ -16,3 +16,4 @@ options = { noremap = true }
 map('n', 'ff', ':Telescope find_files<CR>', options)
 map('n', 'fg', ':Telescope live_grep<CR>', options)
 map('n', 'fb', ':Telescope file_browser path=%:p:h<CR>', options)
+map('n', 'fs', ':Telescope git_status<CR>', options)

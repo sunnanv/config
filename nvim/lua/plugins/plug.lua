@@ -56,6 +56,7 @@ return require('packer').startup({function(use)
     }
     use 'tpope/vim-fugitive'
     use 'tpope/vim-abolish'
+    use 'sindrets/diffview.nvim'
 
     use { 'mfussenegger/nvim-dap' }
     use { 'mfussenegger/nvim-dap-python' }
@@ -63,7 +64,6 @@ return require('packer').startup({function(use)
     use { 'sbdchd/neoformat' }
 
     use { 'phaazon/mind.nvim', branch = 'v2' }
-
 
 end,
 config = {
