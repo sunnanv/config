@@ -16,7 +16,7 @@ opt.fileencoding = 'utf8'
 
 opt.syntax = 'ON'
 opt.termguicolors = true
-cmd('colorscheme dracula')
+-- cmd('colorscheme dracula')
 
 opt.ignorecase = true
 opt.smartcase = true

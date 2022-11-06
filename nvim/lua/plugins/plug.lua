@@ -11,7 +11,8 @@ return require('packer').startup({function(use)
         requires = {'kyazdani42/nvim-web-devicons', opt=true}
     }
 
-    use { 'Mofiqul/dracula.nvim' }
+    -- use { 'Mofiqul/dracula.nvim' }
+    use { 'navarasu/onedark.nvim' }
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -47,7 +48,7 @@ return require('packer').startup({function(use)
 
     use 'vim-test/vim-test'
     use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
-    use 'pocco81/auto-save.nvim'
+    -- use 'pocco81/auto-save.nvim'
 
     use {"jose-elias-alvarez/null-ls.nvim"}
     use {
@@ -65,6 +66,9 @@ return require('packer').startup({function(use)
 
     use { 'phaazon/mind.nvim', branch = 'v2' }
 
+    use { 'phaazon/hop.nvim', branch = 'v2' }
+
+    use { 'dstein64/vim-startuptime' }
 end,
 config = {
   package_root = vim.fn.stdpath('config') .. '/site/pack'

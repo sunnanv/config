@@ -13,6 +13,8 @@ require('plugins.telescope')
 require('plugins.projectionist')
 require('plugins.harpoon')
 require('plugins.mind')
+require('plugins.hop')
+require('plugins.theme')
 
 require('nvim-autopairs').setup{}
 
