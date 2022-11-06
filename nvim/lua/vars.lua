@@ -8,4 +8,10 @@ local packer_path = vim.fn.stdpath('config') .. '/site'
 vim.o.packpath = vim.o.packpath .. ',' .. packer_path
 
 g.python3_host_prog = '~/.local/venv/nvim/bin/python'
-g.vim_json_syntax_conceal=0
+g.vim_json_conceal=0
+
+vim.api.nvim_create_autocmd('FileType',
+    {
+        pattern = '*.json',
+        command = 'vim.g.conceallevel=0'
+    })

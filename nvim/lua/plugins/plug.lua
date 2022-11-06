@@ -11,14 +11,14 @@ return require('packer').startup({function(use)
         requires = {'kyazdani42/nvim-web-devicons', opt=true}
     }
 
-    use { 'Mofiqul/dracula.nvim' }
+    -- use { 'Mofiqul/dracula.nvim' }
+    use { 'navarasu/onedark.nvim' }
 
     use {
         'nvim-telescope/telescope.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { "nvim-telescope/telescope-file-browser.nvim" }
-    use { "nvim-telescope/telescope-frecency.nvim", requires = { "tami5/sqlite.lua" }}
 
     use 'ThePrimeagen/harpoon'
 
@@ -47,7 +47,7 @@ return require('packer').startup({function(use)
 
     use 'vim-test/vim-test'
     use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
-    use 'pocco81/auto-save.nvim'
+    -- use 'pocco81/auto-save.nvim'
 
     use {"jose-elias-alvarez/null-ls.nvim"}
     use {
@@ -56,6 +56,7 @@ return require('packer').startup({function(use)
     }
     use 'tpope/vim-fugitive'
     use 'tpope/vim-abolish'
+    use 'sindrets/diffview.nvim'
 
     use { 'mfussenegger/nvim-dap' }
     use { 'mfussenegger/nvim-dap-python' }
@@ -64,7 +65,10 @@ return require('packer').startup({function(use)
 
     use { 'phaazon/mind.nvim', branch = 'v2' }
 
+    use { 'norcalli/nvim-colorizer.lua' }
+    use { 'phaazon/hop.nvim', branch = 'v2' }
 
+    use { 'dstein64/vim-startuptime' }
 end,
 config = {
   package_root = vim.fn.stdpath('config') .. '/site/pack'
