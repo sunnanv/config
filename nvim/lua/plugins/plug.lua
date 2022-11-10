@@ -47,12 +47,13 @@ return require('packer').startup({function(use)
 
     use 'vim-test/vim-test'
     use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
-    -- use 'pocco81/auto-save.nvim'
+    use 'pocco81/auto-save.nvim'
 
     use {"jose-elias-alvarez/null-ls.nvim"}
     use {
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
+      config = function() require('plugins.gitsigns').setup() end
     }
     use 'tpope/vim-fugitive'
     use 'tpope/vim-abolish'
