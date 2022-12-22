@@ -3,9 +3,9 @@ local M = {}
 function M.setup()
     local set_keymap = vim.api.nvim_set_keymap
     local gitsigns = require('gitsigns')
-    
+
     gitsigns.setup()
-    
+
     local mappings = {
         ['<leader>gb'] = gitsigns.blame_line,
         ['<leader>gg'] = gitsigns.toggle_signs,
@@ -18,7 +18,7 @@ function M.setup()
 
 
     for keys, mapping in pairs(mappings) do
-        set_keymap('n', keys, '', { callback = mapping, noremap = true, silent = true})
+        set_keymap('n', keys, '', { callback = mapping, noremap = true, silent = true })
     end
 end
 
