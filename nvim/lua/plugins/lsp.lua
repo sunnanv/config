@@ -35,6 +35,14 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+-- require'lspinstall'.setup()
+
+-- local servers = require'lspinstall'.installed_servers()
+
+-- for _, server in pairs(servers) do
+--   require'lspconfig'[server].setup{}
+-- end
+
 local lspconfig = require('lspconfig')
 
 lspconfig['pyright'].setup {
@@ -56,8 +64,13 @@ lspconfig['dockerls'].setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
-local luasnip = require 'luasnip'
 
+lspconfig['tailwindcss'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+local luasnip = require 'luasnip'
 
 local cmp = require 'cmp'
 

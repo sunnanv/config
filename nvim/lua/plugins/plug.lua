@@ -45,6 +45,8 @@ return require('packer').startup({function(use)
     use {'RishabhRD/popfix'}
     use {'RishabhRD/nvim-lsputils'}
 
+    use 'kabouzeid/nvim-lspinstall'
+
     use 'vim-test/vim-test'
     use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
     use 'pocco81/auto-save.nvim'
