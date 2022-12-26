@@ -55,6 +55,16 @@ return require('packer').startup({ function(use)
         }
     }
 
+    use {
+        'mfussenegger/nvim-dap',
+        config = function() require 'plugins.nvim-dap'.setup() end,
+        requires = {
+            'mfussenegger/nvim-dap-python',
+            'rcarriga/nvim-dap-ui',
+            'theHamsta/nvim-dap-virtual-text',
+        }
+    }
+
 
     -- Testing
     use {
