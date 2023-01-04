@@ -56,6 +56,15 @@ return require('packer').startup({ function(use)
     }
 
     use {
+        'jayp0521/mason-null-ls.nvim',
+        config = function() require 'plugins.null-ls'.setup() end,
+        requires = {
+            { 'williamboman/mason.nvim' },
+            { 'jose-elias-alvarez/null-ls.nvim' }
+        }
+    }
+
+    use {
         'mfussenegger/nvim-dap',
         config = function() require 'plugins.nvim-dap'.setup() end,
         requires = {

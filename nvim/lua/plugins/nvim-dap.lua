@@ -18,6 +18,7 @@ function M.setup()
         ['<leader>dx'] = dap.step_out,
         ['<leader>dtn'] = dap_python.test_method,
         ['<leader>dtf'] = dap_python.test_class,
+        ['<leader>dq'] = dapui.close
     }
 
 
@@ -25,16 +26,8 @@ function M.setup()
         vim.api.nvim_set_keymap('n', keys, '', { callback = mapping, noremap = true, silent = true })
     end
 
-
-
     dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
     end
 end
 
