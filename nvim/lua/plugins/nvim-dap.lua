@@ -12,9 +12,9 @@ function M.setup()
 
     local mappings = {
         ['<leader>db'] = dap.toggle_breakpoint,
-        ['<leader>dd'] = dap.continue,
+        ['<leader>dc'] = dap.continue,
         ['<leader>do'] = dap.step_over,
-        ['<leader>di'] = dap.step_into,
+        ['<leader>dd'] = dap.step_into,
         ['<leader>dx'] = dap.step_out,
         ['<leader>dtn'] = dap_python.test_method,
         ['<leader>dtf'] = dap_python.test_class,

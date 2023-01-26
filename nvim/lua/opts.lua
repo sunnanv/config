@@ -9,7 +9,7 @@ opt.signcolumn = 'yes'
 opt.cursorline = true
 
 opt.mouse='a'
-opt.clipboard='unnamedplus'
+-- opt.clipboard='unnamedplus'
 
 opt.encoding = 'utf8'
 opt.fileencoding = 'utf8'
@@ -30,3 +30,5 @@ opt.tabstop = 4
 
 opt.splitright = true
 opt.splitbelow = true
+
+opt.exrc = true

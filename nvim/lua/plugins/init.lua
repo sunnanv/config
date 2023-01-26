@@ -107,27 +107,39 @@ return require('packer').startup({ function(use)
     }
     use 'tpope/vim-fugitive'
     use 'sindrets/diffview.nvim'
-
     -- Utils
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use 'machakann/vim-highlightedyank'
     use 'pocco81/auto-save.nvim'
     use 'tpope/vim-abolish'
-    use 'norcalli/nvim-colorizer.lua'
+    use {
+        'brenoprata10/nvim-highlight-colors',
+        config = function()
+            require("nvim-highlight-colors").setup {
+                enable_tailwind = true
+            }
+        end
+    }
+
+
     use {
         'phaazon/hop.nvim',
         branch = 'v2',
         config = function() require 'plugins.hop'.setup() end,
     }
+    use { 'lukas-reineke/indent-blankline.nvim',
+        config = function() require 'plugins.indent-blankline'.setup() end
+    }
 
-
-    -- TODO
-    -- use { 'phaazon/mind.nvim', branch = 'v2' }
-    --
-    -- Debugging
-    -- use { 'mfussenegger/nvim-dap' }
-    -- use { 'mfussenegger/nvim-dap-python' }
+    use {
+        'phaazon/mind.nvim',
+        branch = 'v2.2',
+        config = function() require 'plugins.mind'.setup() end,
+        requires = {
+            'nvim-lua/plenary.nvim'
+        }
+    }
 
 end,
     config = {
