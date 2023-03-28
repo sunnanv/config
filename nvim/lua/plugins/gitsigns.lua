@@ -12,6 +12,8 @@ function M.setup()
         ['<leader>gp'] = gitsigns.preview_hunk,
         ['<leader>gj'] = gitsigns.next_hunk,
         ['<leader>gk'] = gitsigns.prev_hunk,
+        [']g'] = gitsigns.next_hunk,
+        ['[g'] = gitsigns.prev_hunk,
         ['<leader>gu'] = gitsigns.reset_hunk,
         ['<leader>ga'] = gitsigns.stage_hunk,
     }

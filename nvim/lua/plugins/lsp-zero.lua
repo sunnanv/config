@@ -8,7 +8,6 @@ function M.setup()
     local format = function(payload)
         vim.lsp.buf.format({
             filter = function(client)
-                print('name = ' .. client.name)
                 return client.name ~= 'volar' and client.name ~= 'tsserver'
             end
         })

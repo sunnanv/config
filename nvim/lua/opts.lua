@@ -8,7 +8,7 @@ opt.scrolloff = 4
 opt.signcolumn = 'yes'
 opt.cursorline = true
 
-opt.mouse='a'
+opt.mouse = 'a'
 -- opt.clipboard='unnamedplus'
 
 opt.encoding = 'utf8'
@@ -32,3 +32,6 @@ opt.splitright = true
 opt.splitbelow = true
 
 opt.exrc = true
+
+opt.undodir = os.getenv('HOME') .. "/.vim/undodir"
+opt.undofile = true

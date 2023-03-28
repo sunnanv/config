@@ -1,5 +1,21 @@
 local M = {}
 
+local function open_nvim_tree(data)
+
+    -- buffer is a directory
+    local directory = vim.fn.isdirectory(data.file) == 1
+
+    if not directory then
+        return
+    end
+
+    -- change to the directory
+    vim.cmd.cd(data.file)
+
+    -- open the tree
+    require("nvim-tree.api").tree.open()
+end
+
 function M.setup()
     require("nvim-tree").setup {
         git = {
@@ -9,7 +25,7 @@ function M.setup()
             adaptive_size = true,
             mappings = {
                 list = {
-                    { key = 'fi', action = 'live_filter'}
+                    { key = 'fi', action = 'live_filter' }
                 }
             }
         },
@@ -22,21 +38,23 @@ function M.setup()
             icons = {
                 glyphs = {
                     git = {
-                       untracked = "", 
+                        untracked = "",
                     }
                 }
             }
         }
     }
 
+    vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
 
     local mappings = {
-      ['<leader>n'] = ':NvimTreeFocus<CR>',
-      ['<leader>N'] = ':NvimTreeFindFile<CR>',
+        ['<leader>n'] = ':NvimTreeFocus<CR>',
+        ['<leader>N'] = ':NvimTreeFindFile<CR>',
     }
 
     for keys, mapping in pairs(mappings) do
-      vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
     end
 end
 
