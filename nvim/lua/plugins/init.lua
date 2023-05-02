@@ -138,6 +138,10 @@ return require('packer').startup({
             branch = 'v2',
             config = function() require 'plugins.hop'.setup() end,
         }
+        use {
+            'zbirenbaum/copilot.lua',
+            config = function() require 'plugins.copilot'.setup() end
+        }
         use { 'lukas-reineke/indent-blankline.nvim',
             config = function() require 'plugins.indent-blankline'.setup() end
         }
