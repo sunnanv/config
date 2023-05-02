@@ -22,8 +22,8 @@ function M.setup()
     local mappings = {
         ['ff'] = ':Telescope find_files<CR>',
         ['fg'] = ':Telescope live_grep<CR>',
-        ['fb'] = ':Telescope file_browser path=%:p:h<CR>',
         ['fs'] = ':Telescope git_status<CR>',
+        ['fb'] = ':Telescope git_branches<CR>',
         ['gt'] = ':Telescope lsp_type_definitions<CR>',
         ['fr'] = ':Telescope resume<CR>',
     }
