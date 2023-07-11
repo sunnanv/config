@@ -4,20 +4,13 @@ function M.setup()
     local telescope = require 'telescope'
 
     telescope.setup {
-        extensions = {
-            fzf = {
-                fuzzy = true,
-                override_generic_sorter = true,
-                override_file_sorter = true,
-                case_mode = "smart_case",
-            }
-        },
         defaults = {
             path_display = { shorten = { len = 3, exclude = { 2, -1 } } },
         }
     }
 
     telescope.load_extension('fzf')
+
 
     local mappings = {
         ['ff'] = ':Telescope find_files<CR>',

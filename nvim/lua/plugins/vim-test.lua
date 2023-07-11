@@ -1,6 +1,7 @@
 local M = {}
 
 function M.setup()
+    vim.g['test#strategy'] = 'floaterm'
     vim.g['test#python#djangotest#options'] = '--keepdb'
 
     local mappings = {
@@ -15,7 +16,6 @@ function M.setup()
     for keys, mapping in pairs(mappings) do
         vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
     end
-
 end
 
 return M

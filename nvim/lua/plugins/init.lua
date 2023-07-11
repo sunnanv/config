@@ -1,168 +1,193 @@
-return require('packer').startup({
-    function(use)
-        use 'wbthomason/packer.nvim'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		'git',
+		'clone',
+		'--filter=blob:none',
+		'https://github.com/folke/lazy.nvim.git',
+		'--branch=stable', -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
-        -- UI
-        use 'kyazdani42/nvim-web-devicons'
-        use {
-            'kyazdani42/nvim-tree.lua',
-            config = function() require 'plugins.nvim-tree'.setup() end,
-            requires = 'kyazdani42/nvim-web-devicons'
-        }
-        use {
-            'nvim-lualine/lualine.nvim',
-            config = function() require 'plugins.lualine'.setup() end,
-            requires = 'kyazdani42/nvim-web-devicons'
-        }
-        use {
-            'navarasu/onedark.nvim',
-            config = function() require 'plugins.onedark'.setup() end
-        }
+require('lazy').setup({
+	{ 'kyazdani42/nvim-web-devicons', lazy = false, priority = 1000 },
+	{
+		'kyazdani42/nvim-tree.lua',
+		config = function() require 'plugins.nvim-tree'.setup() end,
+		dependencies = 'kyazdani42/nvim-web-devicons'
+	},
+	{
+		'nvim-lualine/lualine.nvim',
+		config = function() require 'plugins.lualine'.setup() end,
+		dependencies = 'kyazdani42/nvim-web-devicons'
+	},
+	-- {
+	--     'navarasu/onedark.nvim',
+	--     config = function() require 'plugins.onedark'.setup() end
+	-- },
+	{
+		'folke/tokyonight.nvim',
+		priority = 1000,
+		config = function() require 'plugins.tokyonight'.setup() end
+	},
+	-- {
+	--     'rmehri01/onenord.nvim',
+	--     config = function() require 'plugins.onenord'.setup() end
+	-- },
+	{
+		'nvim-treesitter/nvim-treesitter',
+		config = function() require 'plugins.nvim-treesitter'.setup() end,
+		build = ":TSUpdate",
+	},
+	{
+		'windwp/nvim-ts-autotag',
+		dependencies = 'nvim-treesitter/nvim-treesitter'
+	},
+	{
+		'windwp/nvim-autopairs',
+		config = function() require 'plugins.nvim-autopairs'.setup() end,
+	},
 
+	{
+		'voldikss/vim-floaterm',
+		config = function() require 'plugins.floaterm'.setup() end,
+	},
+	-- LSP and related
+	{
+		'VonHeikemen/lsp-zero.nvim',
+		config = function() require 'plugins.lsp-zero'.setup() end,
+		dependencies = {
+			-- LSP Support
+			{ 'neovim/nvim-lspconfig' },
+			{ 'williamboman/mason.nvim' },
+			{ 'williamboman/mason-lspconfig.nvim' },
 
-        -- Treesitter
-        use {
-            'nvim-treesitter/nvim-treesitter',
-            run = function() require 'nvim-treesitter.install'.update { with_sync = true } () end,
-            config = function() require 'plugins.nvim-treesitter'.setup() end,
-        }
-        use {
-            'windwp/nvim-ts-autotag',
-            requires = 'nvim-treesitter/nvim-treesitter'
-        }
-        use {
-            'windwp/nvim-autopairs',
-            config = function() require 'plugins.nvim-autopairs'.setup() end,
-        }
+			-- Autocompletion
+			{ 'hrsh7th/nvim-cmp' },
+			{ 'hrsh7th/cmp-buffer' },
+			{ 'hrsh7th/cmp-path' },
+			{ 'saadparwaiz1/cmp_luasnip' },
+			{ 'hrsh7th/cmp-nvim-lsp' },
+			{ 'hrsh7th/cmp-nvim-lua' },
 
-        -- LSP and related
-        use {
-            'VonHeikemen/lsp-zero.nvim',
-            config = function() require 'plugins.lsp-zero'.setup() end,
-            requires = {
-                -- LSP Support
-                { 'neovim/nvim-lspconfig' },
-                { 'williamboman/mason.nvim' },
-                { 'williamboman/mason-lspconfig.nvim' },
+			-- Snippets
+			{ 'L3MON4D3/LuaSnip' },
+			{ 'rafamadriz/friendly-snippets' },
+		},
+	},
 
-                -- Autocompletion
-                { 'hrsh7th/nvim-cmp' },
-                { 'hrsh7th/cmp-buffer' },
-                { 'hrsh7th/cmp-path' },
-                { 'saadparwaiz1/cmp_luasnip' },
-                { 'hrsh7th/cmp-nvim-lsp' },
-                { 'hrsh7th/cmp-nvim-lua' },
+	{
+		'jayp0521/mason-null-ls.nvim',
+		config = function() require 'plugins.null-ls'.setup() end,
+		dependencies = {
+			{ 'williamboman/mason.nvim' },
+			{ 'jose-elias-alvarez/null-ls.nvim' }
+		},
+	},
 
-                -- Snippets
-                { 'L3MON4D3/LuaSnip' },
-                { 'rafamadriz/friendly-snippets' },
-            }
-        }
-
-        use {
-            'jayp0521/mason-null-ls.nvim',
-            config = function() require 'plugins.null-ls'.setup() end,
-            requires = {
-                { 'williamboman/mason.nvim' },
-                { 'jose-elias-alvarez/null-ls.nvim' }
-            }
-        }
-
-        use {
-            'mfussenegger/nvim-dap',
-            config = function() require 'plugins.nvim-dap'.setup() end,
-            requires = {
-                'mfussenegger/nvim-dap-python',
-                'rcarriga/nvim-dap-ui',
-                'theHamsta/nvim-dap-virtual-text',
-            }
-        }
-
-
-        -- Testing
-        use {
-            'vim-test/vim-test',
-            config = function() require 'plugins.vim-test'.setup() end,
-        }
-
-
-        -- Telescope
-        use 'nvim-lua/plenary.nvim'
-        use {
-            'nvim-telescope/telescope.nvim',
-            config = function() require 'plugins.telescope'.setup() end,
-            requires = 'nvim-lua/plenary.nvim'
-        }
-        use "nvim-telescope/telescope-file-browser.nvim"
-        use {
-            'nvim-telescope/telescope-fzf-native.nvim',
-            run =
-            'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-        }
+	{
+		'mfussenegger/nvim-dap',
+		keys = { '<leader>d' },
+		config = function() require 'plugins.nvim-dap'.setup() end,
+		dependencies = {
+			'mfussenegger/nvim-dap-python',
+			'rcarriga/nvim-dap-ui',
+			'theHamsta/nvim-dap-virtual-text',
+		},
+	},
 
 
-        -- harpoon
-        use {
-            'ThePrimeagen/harpoon',
-            config = function() require 'plugins.harpoon'.setup() end
-        }
+	-- Testing
+	{
+		'vim-test/vim-test',
+		keys = { '<leader>t' },
+		config = function() require 'plugins.vim-test'.setup() end,
+	},
 
 
-        -- GIT
-        use {
-            'lewis6991/gitsigns.nvim',
-            config = function() require('plugins.gitsigns').setup() end,
-            requires = 'nvim-lua/plenary.nvim',
-        }
-        use 'tpope/vim-fugitive'
-        use 'sindrets/diffview.nvim'
-        -- Utils
-        use 'tpope/vim-commentary'
-        use 'tpope/vim-surround'
-        use 'machakann/vim-highlightedyank'
-        use 'pocco81/auto-save.nvim'
-        use 'tpope/vim-abolish'
-        use {
-            'brenoprata10/nvim-highlight-colors',
-            config = function()
-                require("nvim-highlight-colors").setup {
-                    enable_tailwind = true
-                }
-            end
-        }
-        use 'RRethy/vim-illuminate'
-        use 'rhysd/conflict-marker.vim'
+	-- Telescope
+	'nvim-lua/plenary.nvim',
+	{
+		'nvim-telescope/telescope.nvim',
+		config = function() require 'plugins.telescope'.setup() end,
+		dependencies = 'nvim-lua/plenary.nvim',
+	},
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build =
+		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+	},
 
-        use {
-            'phaazon/hop.nvim',
-            branch = 'v2',
-            config = function() require 'plugins.hop'.setup() end,
-        }
-        use {
-            'zbirenbaum/copilot.lua',
-            config = function() require 'plugins.copilot'.setup() end
-        }
-        use { 'lukas-reineke/indent-blankline.nvim',
-            config = function() require 'plugins.indent-blankline'.setup() end
-        }
 
-        use {
-            'phaazon/mind.nvim',
-            branch = 'v2.2',
-            config = function() require 'plugins.mind'.setup() end,
-            requires = {
-                'nvim-lua/plenary.nvim'
-            }
-        }
+	-- harpoon
+	{
+		'ThePrimeagen/harpoon',
+		config = function() require 'plugins.harpoon'.setup() end,
+		keys = '<leader>h'
+	},
 
-        use {
-            'dinhhuy258/vim-local-history',
-            branch = 'master',
-            run = ':UpdateRemotePlugins',
-            config = function() require 'plugins.vim-local-history'.setup() end
-        }
-    end,
-    config = {
-        package_root = vim.fn.stdpath('config') .. '/site/pack'
-    }
+
+	-- GIT
+	{
+		'lewis6991/gitsigns.nvim',
+		config = function() require('plugins.gitsigns').setup() end,
+		dependencies = 'nvim-lua/plenary.nvim',
+	},
+	'tpope/vim-fugitive',
+	{
+		'sindrets/diffview.nvim',
+		cmd = 'DiffviewOpen',
+	},
+	-- Utils
+	'tpope/vim-commentary',
+	'tpope/vim-surround',
+	'machakann/vim-highlightedyank',
+	'pocco81/auto-save.nvim',
+	'tpope/vim-abolish',
+	{
+		'brenoprata10/nvim-highlight-colors',
+		config = function()
+			require('nvim-highlight-colors').setup {
+				enable_tailwind = true
+			}
+		end
+	},
+	'RRethy/vim-illuminate',
+	'rhysd/conflict-marker.vim',
+	{
+		'phaazon/hop.nvim',
+		branch = 'v2',
+		config = function() require 'plugins.hop'.setup() end,
+	},
+	{
+		'zbirenbaum/copilot.lua',
+		config = function() require 'plugins.copilot'.setup() end
+	},
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		config = function() require 'plugins.indent-blankline'.setup() end
+	},
+
+	{
+		'phaazon/mind.nvim',
+		branch = 'v2.2',
+		config = function() require 'plugins.mind'.setup() end,
+		dependencies = {
+			'nvim-lua/plenary.nvim'
+		},
+		cmd = { 'MindOpenMain', 'MindOpenProject', 'MindOpenSmartProject' },
+	},
+
+	{
+		'dinhhuy258/vim-local-history',
+		branch = 'master',
+		build = ':UpdateRemotePlugins',
+		config = function() require 'plugins.vim-local-history'.setup() end
+	},
+	{
+		'tzachar/highlight-undo.nvim',
+		config = function() require 'plugins.highlight-undo'.setup() end
+	}
 })

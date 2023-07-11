@@ -5,8 +5,25 @@ function M.setup()
     lsp.preset('recommended')
     lsp.setup()
 
+    lsp.on_attach(function(client, bufnr)
+        lsp.default_keymaps({
+            buffer = bufnr,
+        })
+
+        vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references show_line=false<cr>', { buffer = true })
+    end)
+
+    local cmp = require('cmp')
+
+    cmp.setup({
+        mapping = {
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        }
+    })
+
     local format = function(payload)
         vim.lsp.buf.format({
+            async = true,
             filter = function(client)
                 return client.name ~= 'volar' and client.name ~= 'tsserver'
             end
@@ -43,7 +60,6 @@ function M.setup()
             ))
 
     })
-
 end
 
 return M

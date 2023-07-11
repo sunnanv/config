@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     require('lualine').setup {
         options = {
-            theme = 'onedark'
+            theme = 'tokyonight'
         }
     }
 end
