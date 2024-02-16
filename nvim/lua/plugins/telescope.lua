@@ -10,11 +10,12 @@ function M.setup()
     }
 
     telescope.load_extension('fzf')
+    telescope.load_extension('live_grep_args')
 
 
     local mappings = {
         ['ff'] = ':Telescope find_files<CR>',
-        ['fg'] = ':Telescope live_grep<CR>',
+        ['fg'] = ':Telescope live_grep_args<CR>',
         ['fs'] = ':Telescope git_status<CR>',
         ['fb'] = ':Telescope git_branches<CR>',
         ['gt'] = ':Telescope lsp_type_definitions<CR>',

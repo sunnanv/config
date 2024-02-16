@@ -2,8 +2,34 @@ local M = {}
 
 function M.setup()
     local lsp = require('lsp-zero')
-    lsp.preset('recommended')
-    lsp.setup()
+    lsp.preset({
+        name = 'recommended',
+        manage_nvim_cmp = {
+            set_extra_mappings = true
+        }
+    })
+    require('mason-lspconfig').setup({
+        handlers = {
+            lsp.default_setup,
+            tsserver = function()
+                require('lspconfig').tsserver.setup({
+                    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'json' },
+
+                })
+            end,
+
+            volar = function()
+                require('lspconfig').volar.setup({
+                    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'vue', 'typescriptreact', 'json' },
+
+                })
+            end,
+        }
+    })
+    -- require('lspconfig').volar.setup({
+    --     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
+
+    -- })
 
     lsp.on_attach(function(client, bufnr)
         lsp.default_keymaps({
@@ -13,6 +39,8 @@ function M.setup()
         vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references show_line=false<cr>', { buffer = true })
     end)
 
+
+    lsp.setup()
     local cmp = require('cmp')
 
     cmp.setup({

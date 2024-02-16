@@ -6,6 +6,10 @@ function M.setup()
     }
     local t_mappings = {
         ['<C-t>'] = '<C-\\><C-n>:FloatermToggle<CR>',
+        ['<C-]>'] = '<C-\\><C-n>:FloatermNext<CR>',
+        ['<C-[>'] = '<C-\\><C-n>:FloatermPrev<CR>',
+        ['<C-n>'] = '<C-\\><C-n>:FloatermNew<CR>',
+        ['<C-x>'] = '<C-\\><C-n>:FloatermKill<CR>:FloatermShow<CR>',
     }
 
 
