@@ -8,6 +8,7 @@ return {
             "hrsh7th/nvim-cmp",
             "hrsh7th/cmp-nvim-lsp",
             "L3MON4D3/LuaSnip",
+            "pmizio/typescript-tools.nvim",
             "jayp0521/mason-null-ls.nvim",
             "nvimtools/none-ls.nvim",
             "nvimtools/none-ls-extras.nvim",
@@ -24,7 +25,8 @@ return {
                         vim.lsp.buf.format({
                             async = true,
                             filter = function(client)
-                                local can_format = client.name ~= 'volar' and client.name ~= 'tsserver'
+                                local can_format = client.name ~= 'volar' and client.name ~= 'tsserver' and
+                                    client.name ~= 'typescript-tools'
                                 return can_format
                             end
                         })
@@ -97,13 +99,22 @@ return {
                             }
                         })
                     end,
-                    volar = function()
-                        require('lspconfig').volar.setup({
-                            capabilities = lsp_capabilities,
-                            filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+                },
+            })
 
-                        })
-                    end
+            require('typescript-tools').setup({
+                capabilities = lsp_capabilities,
+                settings = {
+                    tsserver_plugins = {
+                        '@vue/typescript-plugin'
+                    }
+                },
+                filetypes = {
+                    'typescript',
+                    'typescriptreact',
+                    'javascript',
+                    'javascriptreact',
+                    'vue',
                 },
             })
 
