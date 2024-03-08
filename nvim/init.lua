@@ -1,9 +1,9 @@
 vim.g.mapleader = ' '
-vim.g.localleader = '\\'
 
 vim.opt.termguicolors = true
-require('vars')    -- Variables
-require('plugins') -- Plugins
-require('keys')    -- Keymaps
-require('opts')    -- Options
-require('folding')
+require('config.vars')
+require('config.keys')
+require('config.opts')
+
+
+require('config.lazy')
