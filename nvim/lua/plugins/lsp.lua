@@ -3,7 +3,15 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "williamboman/mason.nvim",
+            {
+                "williamboman/mason.nvim",
+                opts = {
+                    registries = {
+                        'github:nvim-java/mason-registry',
+                        'github:mason-org/mason-registry',
+                    },
+                },
+            },
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/nvim-cmp",
             "hrsh7th/cmp-nvim-lsp",
@@ -11,8 +19,20 @@ return {
             "jayp0521/mason-null-ls.nvim",
             "nvimtools/none-ls.nvim",
             "nvimtools/none-ls-extras.nvim",
+            {
+                'nvim-java/nvim-java',
+                dependencies = {
+                    'nvim-java/lua-async-await',
+                    'nvim-java/nvim-java-core',
+                    'nvim-java/nvim-java-test',
+                    'nvim-java/nvim-java-dap',
+                    'MunifTanjim/nui.nvim',
+                    'mfussenegger/nvim-dap',
+                },
+            }
         },
         config = function()
+            require('java').setup()
             vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
             vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
             vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
@@ -63,6 +83,7 @@ return {
                 end
             })
 
+
             local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
@@ -103,8 +124,12 @@ return {
                             filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 
                         })
-                    end
+                    end,
                 },
+            })
+
+            require('lspconfig').jdtls.setup({
+                capabilities = lsp_capabilities,
             })
 
             local cmp = require('cmp')
