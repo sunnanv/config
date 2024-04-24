@@ -53,16 +53,16 @@ return {
                     local telescope_functions = require('telescope.builtin')
 
                     local keymaps = {
-                        ['gd'] = telescope_functions.lsp_definitions,
-                        ['gi'] = telescope_functions.lsp_implementations,
-                        ['go'] = telescope_functions.lsp_type_definitions,
-                        ['gr'] = telescope_functions.lsp_references,
+                        ['gd'] = function() telescope_functions.lsp_definitions() end,
+                        ['gi'] = function() telescope_functions.lsp_implementations() end,
+                        ['go'] = function() telescope_functions.lsp_type_definitions() end,
+                        ['gr'] = function() telescope_functions.lsp_references() end,
                         ['<leader>di'] = function() telescope_functions.diagnostics() end,
                         ['K'] = '<cmd>lua vim.lsp.buf.hover()<cr>',
                         ['gD'] = '<cmd>lua vim.lsp.buf.declaration()<cr>',
                         ['gs'] = '<cmd>lua vim.lsp.buf.signature_help()<cr>',
-                        ['<F2>'] = '<cmd>lua vim.lsp.buf.rename()<cr>',
-                        ['<F4>'] = '<cmd>lua vim.lsp.buf.code_action()<cr>',
+                        ['rn'] = '<cmd>lua vim.lsp.buf.rename()<cr>',
+                        ['ca'] = '<cmd>lua vim.lsp.buf.code_action()<cr>',
                         ['<leader>f'] = { { 'n', 'x' }, format },
                         -- '', telescope_functions.lsp_incoming_calls,
                         -- '', telescope_functions.lsp_outgoing_calls,
@@ -95,7 +95,6 @@ return {
 
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'lua_ls', 'pyright' },
                 handlers = {
                     default_setup,
                     lua_ls = function()
@@ -118,9 +117,19 @@ return {
                             }
                         })
                     end,
-                    volar = function()
-                        require('lspconfig').volar.setup({
+                    tsserver = function()
+                        require('lspconfig').tsserver.setup({
                             capabilities = lsp_capabilities,
+                            init_options = {
+                                plugins = {
+                                    {
+                                        name = "@vue/typescript-plugin",
+                                        location =
+                                        "/Users/johannessunnanvader/.nvm/versions/node/v20.11.0/lib/node_modules/@vue/typescript-plugin",
+                                        languages = { "javascript", "typescript", "vue" },
+                                    }
+                                }
+                            },
                             filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 
                         })
@@ -132,8 +141,14 @@ return {
                 capabilities = lsp_capabilities,
             })
 
-            local cmp = require('cmp')
 
+            local cmp = require('cmp')
+            local has_words_before = function()
+                unpack = unpack or table.unpack
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            end
             cmp.setup({
                 sources = {
                     { name = 'nvim_lsp' },
@@ -141,8 +156,24 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     -- Enter key confirms completion item
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),
-                    ['<Tab>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
-                    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        elseif has_words_before() then
+                            cmp.complete()
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    -- ['<Tab>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
+                    -- ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
                 }),
                 snippet = {
                     expand = function(args)

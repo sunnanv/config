@@ -4,6 +4,13 @@ return {
     "tpope/vim-abolish",
     "RRethy/vim-illuminate",
     {
+        "numtostr/BufOnly.nvim",
+        keys = {
+            { "<leader>bb", "<cmd>BufOnly<CR>" }
+        }
+
+    },
+    {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         config = true
@@ -66,5 +73,19 @@ return {
                 hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
             end, { remap = true })
         end
+    },
+    {
+        'folke/which-key.nvim',
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {}
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {}
     }
 }

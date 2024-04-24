@@ -3,7 +3,7 @@ return {
         {
             "ThePrimeagen/harpoon",
             branch = "harpoon2",
-            keys = "<leader>h",
+            keys = "<leader>m",
             dependencies = {
                 "nvim-lua/plenary.nvim",
             },
@@ -32,37 +32,37 @@ return {
                 end
 
                 local mappings = {
-                    ['<leader>ha'] = function()
-                        harpoon:list():append()
+                    ['<leader>ma'] = function()
+                        harpoon:list():add()
                     end,
-                    ['<leader>hd'] = function()
+                    ['<leader>md'] = function()
                         harpoon:list():remove()
                     end,
-                    ['<leader>hu'] = function()
+                    ['<leader>mu'] = function()
                         toggle_telescope(harpoon:list())
                     end,
-                    ['<leader>hc'] = function()
+                    ['<leader>mc'] = function()
                         harpoon:list():clear()
                     end,
-                    ['<leader>h1'] = function()
+                    ['<leader>m1'] = function()
                         harpoon:list():select(1)
                     end,
-                    ['<leader>h2'] = function()
+                    ['<leader>m2'] = function()
                         harpoon:list():select(2)
                     end,
-                    ['<leader>h3'] = function()
+                    ['<leader>m3'] = function()
                         harpoon:list():select(3)
                     end,
-                    ['<leader>h4'] = function()
+                    ['<leader>m4'] = function()
                         harpoon:list():select(4)
                     end,
-                    ['<leader>hh'] = function()
+                    ['<leader>mm'] = function()
                         harpoon:list():next({ ui_nav_wrap = true })
                     end,
-                    ['<leader>hj'] = function()
+                    ['<leader>mj'] = function()
                         harpoon:list():prev({ ui_nav_wrap = true })
                     end,
-                    ['<leader>hk'] = function()
+                    ['<leader>mk'] = function()
                         harpoon:list():next({ ui_nav_wrap = true })
                     end,
                 }
