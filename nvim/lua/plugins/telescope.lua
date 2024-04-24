@@ -13,6 +13,21 @@ return {
                 telescope.setup({
                     defaults = {
                         path_display = { shorten = { len = 3, exclude = { 2, -1 } } },
+                        layout_config = {
+                            horizontal = {
+                                preview_cutoff = 0,
+                            },
+                            cursor = {
+                                preview_cutoff = 0,
+                            },
+
+                        },
+                        mappings = {
+                            i = {
+                                ["<C-j>"] = require('telescope.actions').move_selection_next,
+                                ["<C-k>"] = require('telescope.actions').move_selection_previous,
+                            },
+                        },
                     },
                     extensions = {
                         coc = {
@@ -35,6 +50,7 @@ return {
                     ['fr'] = ':Telescope resume<CR>',
                     ['fh'] = ':Telescope oldfiles<CR>'
                 }
+
 
                 for keys, mapping in pairs(mappings) do
                     vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
