@@ -3,6 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
+            auto_install = true,
             ensure_installed = {
                 "bash",
                 "html",

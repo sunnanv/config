@@ -49,6 +49,9 @@ return {
                     -- custom mappings
                     vim.keymap.set('n', 'fi', api.live_filter.start, opts('Filter'))
                 end,
+                git = {
+                    timeout = 10000
+                }
             })
 
             local mappings = {

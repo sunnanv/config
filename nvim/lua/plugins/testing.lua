@@ -9,6 +9,7 @@ return {
                 "nvim-neotest/neotest-python",
                 "nvim-neotest/neotest-jest",
                 "nvim-neotest/neotest-vim-test",
+                "nvim-neotest/nvim-nio"
             },
             config = function()
                 local set_keymap = vim.api.nvim_set_keymap
