@@ -2,6 +2,7 @@ return {
     {
         {
             "nvim-neotest/neotest",
+            tag = "v5.1.0",
             dependencies = {
                 "nvim-lua/plenary.nvim",
                 "antoinemadec/FixCursorHold.nvim",
@@ -9,8 +10,9 @@ return {
                 "nvim-neotest/neotest-python",
                 "nvim-neotest/neotest-jest",
                 "nvim-neotest/neotest-vim-test",
-                "nvim-neotest/nvim-nio"
+                { "nvim-neotest/nvim-nio", tag = "v1.9.0" }
             },
+
             config = function()
                 local set_keymap = vim.api.nvim_set_keymap
                 local neotest = require("neotest")

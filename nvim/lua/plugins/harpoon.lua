@@ -68,7 +68,7 @@ return {
                 }
 
                 for keys, mapping in pairs(mappings) do
-                    vim.api.nvim_set_keymap('n', keys, '', { callback = mapping, noremap = true, silent = true })
+                    vim.api.nvim_set_keymap('n', keys, '', { callback = mapping, noremap = true })
                 end
             end
         },

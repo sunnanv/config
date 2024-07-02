@@ -7,7 +7,6 @@ return {
                 "williamboman/mason.nvim",
                 opts = {
                     registries = {
-                        'github:nvim-java/mason-registry',
                         'github:mason-org/mason-registry',
                     },
                 },
@@ -19,20 +18,8 @@ return {
             "jayp0521/mason-null-ls.nvim",
             "nvimtools/none-ls.nvim",
             "nvimtools/none-ls-extras.nvim",
-            {
-                'nvim-java/nvim-java',
-                dependencies = {
-                    'nvim-java/lua-async-await',
-                    'nvim-java/nvim-java-core',
-                    'nvim-java/nvim-java-test',
-                    'nvim-java/nvim-java-dap',
-                    'MunifTanjim/nui.nvim',
-                    'mfussenegger/nvim-dap',
-                },
-            }
         },
         config = function()
-            require('java').setup()
             vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
             vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
             vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
@@ -61,7 +48,7 @@ return {
                         ['K'] = '<cmd>lua vim.lsp.buf.hover()<cr>',
                         ['gD'] = '<cmd>lua vim.lsp.buf.declaration()<cr>',
                         ['gs'] = '<cmd>lua vim.lsp.buf.signature_help()<cr>',
-                        ['rn'] = '<cmd>lua vim.lsp.buf.rename()<cr>',
+                        -- ['rn'] = '<cmd>lua vim.lsp.buf.rename()<cr>',
                         ['ca'] = '<cmd>lua vim.lsp.buf.code_action()<cr>',
                         ['<leader>f'] = { { 'n', 'x' }, format },
                         -- '', telescope_functions.lsp_incoming_calls,
@@ -134,6 +121,13 @@ return {
 
                         })
                     end,
+                    eslint = function()
+                        require('lspconfig').eslint.setup({
+                            capabilities = lsp_capabilities,
+                            root_dir = require('lspconfig/util').root_pattern('.git', '.eslintrc', '.eslintrc.js',
+                                '.eslintrc.json', '.eslintrc.yaml', '.eslintrc.yml'),
+                        })
+                    end,
                 },
             })
 
@@ -153,6 +147,7 @@ return {
                 sources = {
                     { name = 'nvim_lsp' },
                 },
+
                 mapping = cmp.mapping.preset.insert({
                     -- Enter key confirms completion item
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),
@@ -193,11 +188,11 @@ return {
             require("null-ls").setup({
                 sources = {
                     -- Anything not supported by mason.
-                    require("none-ls.diagnostics.eslint_d"),
-                    require('null-ls').builtins.diagnostics.stylelint.with({
-                        filetypes = { 'css', 'scss', 'less', 'sass', 'vue' },
+                    -- require("none-ls.diagnostics.eslint_d"),
+                    -- require('null-ls').builtins.diagnostics.stylelint.with({
+                    --     filetypes = { 'css', 'scss', 'less', 'sass', 'vue' },
 
-                    })
+                    -- })
 
                 }
             })

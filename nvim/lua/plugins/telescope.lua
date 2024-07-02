@@ -55,6 +55,13 @@ return {
                 for keys, mapping in pairs(mappings) do
                     vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
                 end
+
+                local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+                vim.keymap.set("v", "<C-/>", live_grep_args_shortcuts.grep_word_visual_selection_current_buffer)
+                vim.keymap.set("n", "<C-/>", live_grep_args_shortcuts.grep_word_under_cursor_current_buffer)
+
+                vim.keymap.set("v", "<C-.>", live_grep_args_shortcuts.grep_visual_selection)
+                vim.keymap.set("n", "<C-.>", live_grep_args_shortcuts.grep_word_under_cursor)
             end,
         },
         {
@@ -62,5 +69,7 @@ return {
             build =
             "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         },
+        { "xiyaowong/telescope-emoji.nvim" }
     }
+
 }

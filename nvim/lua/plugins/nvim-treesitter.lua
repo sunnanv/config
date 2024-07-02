@@ -12,6 +12,7 @@ return {
                 "json5",
                 "lua",
                 "markdown",
+                "markdown_inline",
                 "python",
                 "regex",
                 "sql",
@@ -27,9 +28,6 @@ return {
             indent = {
                 enable = true,
                 disable = {},
-            },
-            autotag = {
-                enable = true,
             },
         },
         config = function(_, opts)
