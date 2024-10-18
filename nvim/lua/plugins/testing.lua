@@ -1,32 +1,63 @@
 return {
     {
+        -- {
+        --     "vim-test/vim-test",
+        --     config = function()
+        --         vim.g['test#strategy'] = 'floaterm'
+        --         vim.g['test#python#djangotest#options'] = '--keepdb'
+        --
+        --         local mappings = {
+        --             ['<leader>tn'] = '<cmd>TestNearest<CR>',
+        --             ['<leader>tf'] = '<cmd>TestFile<CR>',
+        --             ['<leader>ts'] = '<cmd>TestSuite<CR>',
+        --             ['<leader>tl'] = '<cmd>TestLast<CR>',
+        --             ['<leader>tv'] = '<cmd>TestVisit<CR>',
+        --         }
+        --
+        --
+        --         for keys, mapping in pairs(mappings) do
+        --             vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
+        --         end
+        --     end
+        -- },
         {
             "nvim-neotest/neotest",
-            tag = "v5.1.0",
             dependencies = {
+                "nvim-neotest/nvim-nio",
                 "nvim-lua/plenary.nvim",
-                "antoinemadec/FixCursorHold.nvim",
                 "nvim-treesitter/nvim-treesitter",
                 "nvim-neotest/neotest-python",
                 "nvim-neotest/neotest-jest",
                 "nvim-neotest/neotest-vim-test",
-                { "nvim-neotest/nvim-nio", tag = "v1.9.0" }
+                "marilari88/neotest-vitest",
             },
-
+            lazy = true,
+            keys = {
+                { '<leader>tn', function() require('neotest').run.run() end },
+                { '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end, },
+                { '<leader>td', function() require('neotest').run.run({ strategy = 'dap' }) end },
+                { '<leader>tl', function() require('neotest').run.run_last() end },
+                { '<leader>ta', function() require('neotest').run.attach() end },
+                { '<leader>tt', function() require('neotest').summary.toggle() end },
+                { '<leader>tm', function() require('neotest').summary.run_marked() end },
+                { '<leader>to', function() require('neotest').output.open({ quiet = true }) end },
+                { '<leader>tO', function() require('neotest').output.open({ quiet = true, enter = true }) end },
+                { '[t',         function() require('neotest').jump.prev({ status = 'failed' }) end },
+                { ']t',         function() require('neotest').jump.next({ status = 'failed' }) end },
+            },
             config = function()
-                local set_keymap = vim.api.nvim_set_keymap
                 local neotest = require("neotest")
 
                 neotest.setup({
                     discovery = {
-                        concurrent = 4,
+                        enabled = false,
+                        -- concurrent = 1,
                         filter_dir = function(name, rel_path, root)
                             if name == "node_modules" then
                                 return false
                             end
                             return true
                         end
-
                     },
                     adapters = {
                         require("neotest-python")({
@@ -34,44 +65,27 @@ return {
                             args = { "--keepdb" },
                         }),
                         require("neotest-jest")({
+                            filter_dir = function(name, rel_path, root)
+                                return name ~= "node_modules"
+                            end,
                         }),
                         require("neotest-vim-test")({
                             ignore_file_types = { "python" },
                         }),
+                        require('neotest-vitest')({
+                            filter_dir = function(name, rel_path, root)
+                                return name ~= "node_modules"
+                            end,
+                        })
                     },
                     summary = {
                         follow = true,
                         open = "botright vsplit | vertical resize 75"
                     },
                 })
-
-                local mappings = {
-                    ['<leader>tn'] = function() neotest.run.run() end,
-                    ['<leader>tN'] = function()
-                        neotest.run.run()
-                        neotest.run.attach()
-                    end,
-                    ['<leader>tf'] = function() neotest.run.run(vim.fn.expand('%')) end,
-                    ['<leader>tF'] = function()
-                        neotest.run.run(vim.fn.expand('%'))
-                        neotest.run.attach()
-                    end,
-                    ['<leader>td'] = function() neotest.run.run({ strategy = 'dap' }) end,
-                    ['<leader>tl'] = function() neotest.run.run_last() end,
-                    ['<leader>ta'] = function() neotest.run.attach() end,
-                    ['<leader>tt'] = function() neotest.summary.toggle() end,
-                    ['<leader>tm'] = function() neotest.summary.run_marked() end,
-                    ['<leader>to'] = function() neotest.output.open({ quiet = true }) end,
-                    ['<leader>tO'] = function() neotest.output.open({ quiet = true, enter = true }) end,
-                    ['[t'] = function() neotest.jump.prev({ status = 'failed' }) end,
-                    [']t'] = function() neotest.jump.next({ status = 'failed' }) end,
-                }
-
-                for keys, mapping in pairs(mappings) do
-                    set_keymap('n', keys, '', { callback = mapping, noremap = true, silent = true })
-                end
             end,
         },
+
 
     }
 }

@@ -1,27 +1,34 @@
 return {
     {
-        "voldikss/vim-floaterm",
-        config = function()
-            local mappings = {
-                ['<C-t>'] = ':FloatermToggle<CR>',
-            }
-            local t_mappings = {
-                ['<C-t>'] = '<C-\\><C-n>:FloatermToggle<CR>',
-                ['<C-]>'] = '<C-\\><C-n>:FloatermNext<CR>',
-                ['<C-[>'] = '<C-\\><C-n>:FloatermPrev<CR>',
-                ['<C-n>'] = '<C-\\><C-n>:FloatermNew<CR>',
-                ['<C-x>'] = '<C-\\><C-n>:FloatermKill<CR>:FloatermShow<CR>',
-                ['<Esc>'] = '<Esc>',
-            }
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        opts = {
 
+            size = function(term)
+                if term.direction == 'horizontal' then
+                    return 30
+                elseif term.direction == 'vertical' then
+                    return vim.o.columns * 0.4
+                end
+            end,
+            open_mapping = [[<C-t>]],
+            direction = 'vertical',
+            float_opts = {
+                border = 'curved',
+            },
+        },
+        keys = {
+            '<C-t>',
+        },
+        config = function(_, opts)
+            require('toggleterm').setup(opts)
 
-            for keys, mapping in pairs(mappings) do
-                vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
+            function _G.set_terminal_keymaps()
+                vim.keymap.set('t', '<C-\\>', [[<C-\><C-n>]], { buffer = 0 })
             end
 
-            for keys, mapping in pairs(t_mappings) do
-                vim.api.nvim_set_keymap('t', keys, mapping, { noremap = true, silent = true })
-            end
-        end,
+            -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+            vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+        end
     }
 }
