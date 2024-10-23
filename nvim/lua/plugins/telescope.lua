@@ -9,13 +9,14 @@ return {
                 "kkharji/sqlite.lua",
             },
             keys = {
-                { 'ff', ":Telescope find_files<CR>" },
-                { 'fg', ":Telescope live_grep_args<CR>" },
-                { 'fs', ":Telescope git_status<CR>" },
-                { 'fb', ":Telescope git_branches<CR>" },
-                { 'gt', ":Telescope lsp_type_definitions<CR>" },
-                { 'fr', ":Telescope resume<CR>" },
-                { 'fh', ":Telescope oldfiles<CR>" },
+                { "ff", function() require("telescope.builtin").find_files() end },
+                { "fg", function() require("telescope").extensions.live_grep_args.live_grep_args() end },
+                { "fs", function() require("telescope.builtin").git_status() end },
+                { "fb", function() require("telescope.builtin").git_branches() end },
+                { "gt", function() require("telescope.builtin").lsp_type_definitions() end },
+                { "fr", function() require("telescope.builtin").resume() end },
+                { "fh", function() require("telescope.builtin").oldfiles() end },
+                { "ft", function() require("telescope.builtin").treesitter() end }
             },
             opts = {
                 defaults = {
@@ -27,29 +28,27 @@ return {
                         cursor = {
                             preview_cutoff = 0,
                         },
-
                     },
                     mappings = {
                         i = {
-                            ["<C-j>"] = require('telescope.actions').move_selection_next,
-                            ["<C-k>"] = require('telescope.actions').move_selection_previous,
+                            ["<C-j>"] = require("telescope.actions").move_selection_next,
+                            ["<C-k>"] = require("telescope.actions").move_selection_previous,
                         },
                     },
                 },
             },
             config = function(_, opts)
-                local telescope = require('telescope')
-                require 'telescope-all-recent'.setup {
+                require("telescope-all-recent").setup({
                     default = {
-                        sorting = 'frecency'
-                    }
-                }
+                        sorting = "frecency",
+                    },
+                })
 
+                local telescope = require("telescope")
                 telescope.setup(opts)
 
-                telescope.load_extension('fzf')
-                telescope.load_extension('live_grep_args')
-
+                telescope.load_extension("fzf")
+                telescope.load_extension("live_grep_args")
 
                 local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
                 vim.keymap.set("v", "<C-/>", live_grep_args_shortcuts.grep_word_visual_selection_current_buffer)
@@ -64,7 +63,6 @@ return {
             build =
             "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         },
-        { "xiyaowong/telescope-emoji.nvim" }
-    }
-
+        { "xiyaowong/telescope-emoji.nvim" },
+    },
 }
