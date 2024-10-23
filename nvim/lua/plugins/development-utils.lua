@@ -4,31 +4,31 @@ return {
         cmd = {
             "Abolish",
             "Subvert",
-            "S"
+            "S",
         },
     },
     {
         "numtostr/BufOnly.nvim",
         keys = {
-            { "<leader>bb", "<cmd>BufOnly<CR>" }
-        }
-
+            { "<leader>bb", "<cmd>BufOnly<CR>" },
+        },
     },
     {
-        'windwp/nvim-ts-autotag',
+        "windwp/nvim-ts-autotag",
         event = "InsertEnter",
-        opts = {}
+        opts = {},
     },
     {
         "dinhhuy258/vim-local-history",
         branch = "master",
+        lazy = false,
         build = ":UpdateRemotePlugins",
         keys = {
-            { "<leader>lh", "<cmd>LocalHistoryToggle<CR>" }
+            { "<leader>lh", "<cmd>LocalHistoryToggle<CR>" },
         },
         cmd = "LocalHistoryToggle",
         config = function()
-            vim.g.local_history_path = os.getenv('HOME') .. "/.vim/local_history"
+            vim.g.local_history_path = os.getenv("HOME") .. "/.vim/local_history"
             vim.g.local_history_max_changes = 500
             vim.g.local_history_new_change_delay = 60
         end,
@@ -37,19 +37,29 @@ return {
         "okuuva/auto-save.nvim",
         event = "VeryLazy",
         config = function()
-            require('auto-save').setup({
-                debounce_delay = 1000
+            require("auto-save").setup({
+                debounce_delay = 1000,
+                condition = function(buf)
+                    local fn = vim.fn
+                    local utils = require("auto-save.utils.data")
+
+                    -- don't save for `sql` file types
+                    if utils.not_in(fn.getbufvar(buf, "&filetype"), { "sql" }) then
+                        return true
+                    end
+                    return false
+                end,
             })
-        end
+        end,
     },
     {
-        'folke/which-key.nvim',
+        "folke/which-key.nvim",
         event = "VeryLazy",
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = {}
+        opts = {},
     },
     {
         "johmsalas/text-case.nvim",
@@ -72,33 +82,64 @@ return {
     },
     {
         "tpope/vim-repeat",
-        event = "VeryLazy"
+        event = "VeryLazy",
     },
     {
-        'smoka7/hop.nvim',
+        "smoka7/hop.nvim",
         version = "*",
-        keys = { "f", "F", "t", "T", "<leader>s", "<leader>S" },
         keys = {
-            { 'f', function()
-                require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true })
-            end },
-            { 'F', function()
-                require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })
-            end },
-            { 't', function()
-                require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-            end },
-            { 'T', function()
-                require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-            end },
-            { '<leader>s', function()
-                require('hop').hint_words({ direction = require('hop.hint').HintDirection.AFTER_CURSOR })
-            end },
-            { '<leader>S', function()
-                require('hop').hint_words({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })
-            end },
+            {
+                "f",
+                function()
+                    require("hop").hint_char1({
+                        direction = require("hop.hint").HintDirection.AFTER_CURSOR,
+                        current_line_only = true,
+                    })
+                end,
+            },
+            {
+                "F",
+                function()
+                    require("hop").hint_char1({
+                        direction = require("hop.hint").HintDirection.BEFORE_CURSOR,
+                        current_line_only = true,
+                    })
+                end,
+            },
+            {
+                "t",
+                function()
+                    require("hop").hint_char1({
+                        direction = require("hop.hint").HintDirection.AFTER_CURSOR,
+                        current_line_only = true,
+                        hint_offset = -1,
+                    })
+                end,
+            },
+            {
+                "T",
+                function()
+                    require("hop").hint_char1({
+                        direction = require("hop.hint").HintDirection.BEFORE_CURSOR,
+                        current_line_only = true,
+                        hint_offset = 1,
+                    })
+                end,
+            },
+            {
+                "<leader>s",
+                function()
+                    require("hop").hint_words({ direction = require("hop.hint").HintDirection.AFTER_CURSOR })
+                end,
+            },
+            {
+                "<leader>S",
+                function()
+                    require("hop").hint_words({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR })
+                end,
+            },
         },
-        opts = {}
+        opts = {},
     },
     {
         "gbprod/yanky.nvim",
@@ -106,8 +147,8 @@ return {
         config = function()
             require("yanky").setup({
                 system_clipboard = {
-                    sync_with_ring = false
-                }
+                    sync_with_ring = false,
+                },
             })
 
             vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
@@ -122,7 +163,7 @@ return {
     {
         "folke/zen-mode.nvim",
         keys = {
-            { "<leader>zz", "<cmd>ZenMode<CR>" }
+            { "<leader>zz", "<cmd>ZenMode<CR>" },
         },
         opts = {},
     },
