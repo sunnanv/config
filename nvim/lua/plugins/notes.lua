@@ -2,18 +2,18 @@ return {
     {
         "epwalsh/obsidian.nvim",
         version = "*",
-        ft = "markdown",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+        cmd = { "ObsidianToday", "ObsidianQuickSwitch", "ObsidianFind", "ObsidianTags", "ObsidianDailies" },
         keys = {
-            { '<leader>oo', '<cmd>ObsidianToday<cr>' },
-            { '<leader>oq', '<cmd>ObsidianQuickSwitch<cr>' },
-            { '<leader>of', '<cmd>ObsidianFind<cr>' },
-            { '<leader>ot', '<cmd>ObsidianTags<cr>' },
-            { '<leader>od', '<cmd>ObsidianDailies<cr>' },
+            { "<leader>oo", ":ObsidianToday<cr>" },
+            { "<leader>oq", ":ObsidianQuickSwitch<cr>" },
+            { "<leader>of", ":ObsidianFind<cr>" },
+            { "<leader>ot", ":ObsidianTags<cr>" },
+            { "<leader>od", ":ObsidianDailies<cr>" },
         },
-        opt = {
+        opts = {
             workspaces = {
                 {
                     name = "work",
@@ -22,7 +22,7 @@ return {
                 {
                     name = "personal",
                     path = "~/vaults/personal",
-                }
+                },
             },
             daily_notes = {
                 folder = "dailies",
@@ -57,13 +57,12 @@ return {
                     end,
                     opts = { buffer = true, expr = true },
                 },
-
             },
             follow_url_func = function(url)
                 vim.fn.jobstart({ "open", url }) -- Mac OS
             end,
             follow_img_func = function(img)
-                vim.fn.jobstart { "qlmanage", "-p", img } -- Mac OS quick look preview
+                vim.fn.jobstart({ "qlmanage", "-p", img }) -- Mac OS quick look preview
             end,
             ui = {
                 enable = false,
@@ -73,9 +72,8 @@ return {
                     ["~"] = { char = "", hl_group = "ObsidianRightArrow" },
                     ["o"] = { char = "󰰱", hl_group = "ObsidianTilde" },
                     ["-"] = { char = "", hl_group = "ObsidianTodo" },
-                }
+                },
             },
-
         },
     },
     {
@@ -86,5 +84,5 @@ return {
             vim.g.mkdp_filetypes = { "markdown" }
         end,
         ft = { "markdown" },
-    }
+    },
 }
