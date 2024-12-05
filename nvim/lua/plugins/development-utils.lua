@@ -127,13 +127,13 @@ return {
                 end,
             },
             {
-                "<leader>s",
+                "s",
                 function()
                     require("hop").hint_words({ direction = require("hop.hint").HintDirection.AFTER_CURSOR })
                 end,
             },
             {
-                "<leader>S",
+                "S",
                 function()
                     require("hop").hint_words({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR })
                 end,

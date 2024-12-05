@@ -20,7 +20,8 @@ return {
             },
             opts = {
                 defaults = {
-                    path_display = { shorten = { len = 3, exclude = { 2, -1 } } },
+                    -- path_display = { shorten = { len = 3, exclude = { 2, -1 } } },
+                    layout_strategy = "vertical",
                     layout_config = {
                         horizontal = {
                             preview_cutoff = 0,
@@ -36,26 +37,48 @@ return {
                         },
                     },
                 },
+                extensions = {
+                    live_grep_args = {
+                        auto_quoting = true,
+                        mappings = {
+                            i = {
+                                ["<C-k>"] = function() require("telescope-live-grep-args.actions").quote_prompt() end,
+                                ["<C-i>"] = function()
+                                    require("telescope-live-grep-args.actions").quote_prompt({
+                                        postfix = " --iglob "
+                                    })
+                                end,
+                                ["<C-space>"] = function() require("telescope-live-grep-args.actions").to_fuzzy_refine() end,
+                            },
+                        },
+                    }
+                }
             },
             config = function(_, opts)
+                local telescope = require("telescope")
+                telescope.setup(opts)
+
                 require("telescope-all-recent").setup({
                     default = {
                         sorting = "frecency",
                     },
+                    pickers = {
+                        git_branches = {
+                            sorting = "recent",
+                        },
+                    }
                 })
 
-                local telescope = require("telescope")
-                telescope.setup(opts)
 
                 telescope.load_extension("fzf")
                 telescope.load_extension("live_grep_args")
 
                 local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
-                vim.keymap.set("v", "<C-/>", live_grep_args_shortcuts.grep_word_visual_selection_current_buffer)
-                vim.keymap.set("n", "<C-/>", live_grep_args_shortcuts.grep_word_under_cursor_current_buffer)
+                vim.keymap.set("v", "<C-b>", live_grep_args_shortcuts.grep_word_visual_selection_current_buffer)
+                vim.keymap.set("n", "<C-b>", live_grep_args_shortcuts.grep_word_under_cursor_current_buffer)
 
-                vim.keymap.set("v", "<C-.>", live_grep_args_shortcuts.grep_visual_selection)
-                vim.keymap.set("n", "<C-.>", live_grep_args_shortcuts.grep_word_under_cursor)
+                vim.keymap.set("v", "<C-f>", live_grep_args_shortcuts.grep_visual_selection)
+                vim.keymap.set("n", "<C-f>", live_grep_args_shortcuts.grep_word_under_cursor)
             end,
         },
         {

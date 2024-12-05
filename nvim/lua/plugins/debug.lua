@@ -9,11 +9,11 @@ return {
             { "jay-babu/mason-nvim-dap.nvim",    opts = {} },
         },
         keys = {
-            { '<leader>db', function() require('dap').toggle_breakpoint() end },
-            { '<leader>dc', function() require('dap').continue() end },
-            { '<leader>do', function() require('dap').step_over() end },
-            { '<leader>dd', function() require('dap').step_into() end },
-            { '<leader>dx', function() require('dap').step_out() end },
+            { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Toggle breakpoint' },
+            { '<leader>dc', function() require('dap').continue() end,          desc = 'DAP continue' },
+            { '<leader>do', function() require('dap').step_over() end,         desc = 'DAP step over' },
+            { '<leader>dd', function() require('dap').step_into() end,         desc = 'DAP step into' },
+            { '<leader>dx', function() require('dap').step_out() end,          desc = 'DAP step out' },
         }
     },
     {
@@ -31,7 +31,7 @@ return {
         'rcarriga/nvim-dap-ui',
         keys = {
             { '<leader>du', function() require('dapui').open() end },
-            { '<leader>dq', function() dapui.close() end },
+            { '<leader>dq', function() require('dapui').close() end },
         },
         opts = {}
     },

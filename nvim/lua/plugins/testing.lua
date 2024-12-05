@@ -51,13 +51,6 @@ return {
                 neotest.setup({
                     discovery = {
                         enabled = false,
-                        -- concurrent = 1,
-                        filter_dir = function(name, rel_path, root)
-                            if name == "node_modules" then
-                                return false
-                            end
-                            return true
-                        end
                     },
                     adapters = {
                         require("neotest-python")({

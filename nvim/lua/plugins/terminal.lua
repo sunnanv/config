@@ -12,7 +12,7 @@ return {
                 end
             end,
             open_mapping = [[<C-t>]],
-            direction = 'vertical',
+            direction = 'horizontal',
             float_opts = {
                 border = 'curved',
             },

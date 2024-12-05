@@ -14,6 +14,7 @@ return {
         event = "VeryLazy",
         dependencies = {
             "nvim-telescope/telescope.nvim",
+            "git@gitlab.com:schrieveslaach/sonarlint.nvim",
         },
         config = function()
             vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>")
@@ -28,7 +29,6 @@ return {
                             async = true,
                             filter = function(client)
                                 local can_format = client.name ~= "volar" and client.name ~= "ts_ls"
-                                print(client.name .. " can format: " .. tostring(can_format))
                                 return can_format
                             end,
                         })
@@ -41,10 +41,10 @@ return {
                     vim.keymap.set("n", "go", telescope_functions.lsp_type_definitions)
                     vim.keymap.set("n", "gr", telescope_functions.lsp_references)
                     vim.keymap.set("n", "<leader>di", telescope_functions.diagnostics)
-                    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-                    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-                    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-                    vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover)
+                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+                    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help)
+                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
                     vim.keymap.set({ "n", "x" }, "<leader>f", format)
                 end,
             })
@@ -208,5 +208,5 @@ return {
                 sources = {},
             })
         end,
-    },
+    }
 }
