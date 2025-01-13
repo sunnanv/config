@@ -5,13 +5,13 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
-        cmd = { "ObsidianToday", "ObsidianQuickSwitch", "ObsidianFind", "ObsidianTags", "ObsidianDailies" },
+        cmd = { "ObsidianToday", "ObsidianQuickSwitch", "ObsidianFind", "ObsidianTags", "ObsidianDailies", "ObsidianOpen" },
         keys = {
             { "<leader>oo", ":ObsidianToday<cr>" },
             { "<leader>oq", ":ObsidianQuickSwitch<cr>" },
             { "<leader>of", ":ObsidianFind<cr>" },
             { "<leader>ot", ":ObsidianTags<cr>" },
-            { "<leader>od", ":ObsidianDailies<cr>" },
+            { "<leader>od", ":ObsidianQuickSwitch diary<cr>" },
         },
         opts = {
             workspaces = {

@@ -122,6 +122,7 @@ PYTHON_USER_PATH="$(python3 -m site --user-base)/bin"
 export PATH="$PATH:$PYTHON_USER_PATH"
 
 alias dev='./dev.sh'
+alias ghpr='gh pr view -w || gh pr create -w'
 # export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 # export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 

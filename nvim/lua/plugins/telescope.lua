@@ -20,8 +20,8 @@ return {
             },
             opts = {
                 defaults = {
-                    -- path_display = { shorten = { len = 3, exclude = { 2, -1 } } },
-                    layout_strategy = "vertical",
+                    path_display = { shorten = { len = 3, exclude = { 2, -1 } } },
+                    layout_strategy = "horizontal",
                     layout_config = {
                         horizontal = {
                             preview_cutoff = 0,
@@ -34,6 +34,7 @@ return {
                         i = {
                             ["<C-j>"] = require("telescope.actions").move_selection_next,
                             ["<C-k>"] = require("telescope.actions").move_selection_previous,
+                            ["<C-t>"] = function(...) require("trouble.sources.telescope").open(...) end,
                         },
                     },
                 },

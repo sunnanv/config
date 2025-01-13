@@ -40,14 +40,12 @@ return {
             require("auto-save").setup({
                 debounce_delay = 1000,
                 condition = function(buf)
-                    local fn = vim.fn
-                    local utils = require("auto-save.utils.data")
+                    local filetype = vim.fn.getbufvar(buf, "&filetype")
 
-                    -- don't save for `sql` file types
-                    if utils.not_in(fn.getbufvar(buf, "&filetype"), { "sql" }) then
-                        return true
+                    if vim.list_contains({ "sql", "harpoon" }, filetype) then
+                        return false
                     end
-                    return false
+                    return true
                 end,
             })
         end,
@@ -167,14 +165,51 @@ return {
         },
         opts = {},
     },
-    {
-        "smjonas/inc-rename.nvim",
-        keys = { "rn" },
-        config = function()
-            require("inc_rename").setup()
-            vim.keymap.set("n", "rn", function()
-                return ":IncRename " .. vim.fn.expand("<cword>")
-            end, { noremap = true, silent = true, expr = true })
-        end,
+    { 
+        "saecki/live-rename.nvim", 
+        keys = {
+            { "rn", function() require('live-rename').rename() end },  
+            { "Rn", function() require('live-rename').rename({text = "", insert = true}) end },  
+        },
+        opts = {
+            keys = {
+                submit = {
+                    { "n", "<c-space>" },
+                    { "v", "<c-space>" },
+                    { "i", "<c-space>" },
+                }
+            }
+        },
     },
+
+    -- {
+    --     "smjonas/inc-rename.nvim",
+    --     config = function()
+    --         require("inc_rename").setup()
+    --         vim.keymap.set("n", "rn", function()
+    --             return ":IncRename " .. vim.fn.expand("<cword>")
+    --         end, { expr = true })
+    --     end,
+    -- },
+    {
+        "ranelpadon/python-copy-reference.vim"
+    },
+    {
+        'mawkler/demicolon.nvim',
+        -- keys = { ';', ',', 't', 'f', 'T', 'F', ']', '[', ']d', '[d' }, -- Uncomment this to lazy load
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        },
+        opts = {
+            integrations = {
+                gitsigns = {
+                    keymaps = {
+                        next = ']h',
+                        prev = '[h',
+                    }
+                }
+            }
+        }
+    }
 }

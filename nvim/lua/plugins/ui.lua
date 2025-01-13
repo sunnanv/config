@@ -4,7 +4,7 @@ return {
         priority = 1000,
         config = function()
             require('tokyonight').setup({
-                style = 'night',
+                style = 'storm',
             })
             vim.cmd [[colorscheme tokyonight]]
         end,
@@ -94,7 +94,7 @@ return {
 
             require("markview").setup({
                 checkboxes = presets.checkboxes.nerd,
-                headings = presets.headings.glow,
+                headings = presets.headings.slanted,
             })
         end,
     },
