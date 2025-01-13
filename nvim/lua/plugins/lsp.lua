@@ -63,19 +63,19 @@ return {
         "williamboman/mason-lspconfig.nvim",
         event = "VeryLazy",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
+            "saghen/blink.cmp",
             "neovim/nvim-lspconfig",
         },
         opts = {
             handlers = {
                 function(server)
                     require("lspconfig")[server].setup({
-                        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                        capabilities = require('blink.cmp').get_lsp_capabilities(),
                     })
                 end,
                 lua_ls = function()
                     require("lspconfig").lua_ls.setup({
-                        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                        capabilities = require('blink.cmp').get_lsp_capabilities(),
                         settings = {
                             Lua = {
                                 runtime = {
@@ -95,7 +95,7 @@ return {
                 end,
                 ts_ls = function()
                     require("lspconfig").ts_ls.setup({
-                        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                        capabilities = require('blink.cmp').get_lsp_capabilities(),
                         init_options = {
                             plugins = {
                                 {
@@ -111,7 +111,7 @@ return {
                 end,
                 eslint = function()
                     require("lspconfig").eslint.setup({
-                        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                        capabilities = require('blink.cmp').get_lsp_capabilities(),
                         root_dir = require("lspconfig/util").root_pattern(
                             ".git",
                             ".eslintrc",
@@ -126,64 +126,48 @@ return {
         },
     },
     {
-        "hrsh7th/nvim-cmp",
-        event = "VeryLazy",
-        opts = function()
-            local cmp = require("cmp")
+        'saghen/blink.cmp',
+        lazy = false,
+        dependencies = 'rafamadriz/friendly-snippets',
 
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0
-                    and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
+        version = '*',
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = {
+                preset = 'enter',
+                ['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
+                ['<leader-Tab>'] = { 'show' },
+                ['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' },
+                ['<C-e>'] = { 'show', 'hide' },
+                ['<C-space>'] = {},
+            },
 
-            return {
-                sources = {
-                    { name = "nvim_lsp" },
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
+            },
+
+            sources = {
+                default =
+                { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+            completion = {
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 200,
                 },
-
-                mapping = cmp.mapping.preset.insert({
-                    -- Enter key confirms completion item
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                }),
-            }
-        end,
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-        lazy = true,
-        dependencies = {
-            {
-                "hrsh7th/nvim-cmp",
-                opts = {
-                    snippet = {
-                        expand = function(args)
-                            require("luasnip").lsp_expand(args.body)
-                        end,
-                    },
+                accept = {
+                    auto_brackets = { enabled = true },
                 },
+                list = {
+                    selection = function(ctx)
+                        return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
+                    end
+                }
             },
         },
+        opts_extend = { "sources.default" }
     },
     {
         "nvimtools/none-ls.nvim",
@@ -204,8 +188,8 @@ return {
                 automatic_installation = false,
                 handlers = {},
             })
-            require("null-ls").setup({
-                sources = {},
+            local null_ls = require("null-ls")
+            null_ls.setup({
             })
         end,
     }
