@@ -150,7 +150,10 @@ return {
 
             sources = {
                 default =
-                { 'lsp', 'path', 'snippets', 'buffer' },
+                { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
+                providers = {
+                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                }
             },
             completion = {
                 documentation = {
@@ -161,9 +164,15 @@ return {
                     auto_brackets = { enabled = true },
                 },
                 list = {
-                    selection = function(ctx)
-                        return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
-                    end
+                    selection = {
+                        preselect = function(ctx)
+                            return ctx.mode ~= 'cmdline'
+                        end,
+                        auto_insert = function(ctx) return ctx.mode == 'cmdline' end,
+                    }
+                    -- selection = function(ctx)
+                    --     return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
+                    -- end
                 }
             },
         },
