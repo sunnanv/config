@@ -126,9 +126,24 @@ return {
         },
     },
     {
+        'saghen/blink.compat',
+        -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
+        version = '*',
+        -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+        lazy = true,
+        -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+        opts = {},
+    },
+    {
         'saghen/blink.cmp',
         lazy = false,
-        dependencies = 'rafamadriz/friendly-snippets',
+        dependencies = { 'rafamadriz/friendly-snippets', {
+            "MattiasMTS/cmp-dbee",
+            dependencies = {
+                { "kndndrj/nvim-dbee" }
+            },
+            opts = {}, -- needed
+        }, },
 
         version = '*',
         ---@module 'blink.cmp'
@@ -150,9 +165,12 @@ return {
 
             sources = {
                 default =
-                { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
+                { 'lsp', 'path', 'snippets', 'buffer', 'dbee' },
                 providers = {
-                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                    dbee = {
+                        name = 'cmp-dbee', -- IMPORTANT: use the same name as you would for nvim-cmp
+                        module = 'blink.compat.source',
+                    }
                 }
             },
             completion = {
