@@ -13,7 +13,6 @@ return {
         "neovim/nvim-lspconfig",
         event = "VeryLazy",
         dependencies = {
-            "nvim-telescope/telescope.nvim",
             "git@gitlab.com:schrieveslaach/sonarlint.nvim",
         },
         config = function()
@@ -34,13 +33,6 @@ return {
                         })
                     end
 
-                    local telescope_functions = require("telescope.builtin")
-
-                    vim.keymap.set("n", "gd", telescope_functions.lsp_definitions)
-                    vim.keymap.set("n", "gi", telescope_functions.lsp_implementations)
-                    vim.keymap.set("n", "go", telescope_functions.lsp_type_definitions)
-                    vim.keymap.set("n", "gr", telescope_functions.lsp_references)
-                    vim.keymap.set("n", "<leader>di", telescope_functions.diagnostics)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover)
                     vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
                     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help)

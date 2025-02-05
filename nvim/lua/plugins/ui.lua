@@ -14,7 +14,7 @@ return {
         dependencies = "nvim-tree/nvim-web-devicons",
         keys = {
             { "<leader>N", "<cmd>NvimTreeFocus<CR>" },
-            { "<leader>n", "<cmd>NvimTreeFindFile<CR>" },
+            -- { "<leader>n", "<cmd>NvimTreeFindFile<CR>" },
         },
         opts = {
             filters = {
@@ -116,19 +116,19 @@ return {
                             icon_hl = '@variable',
                             desc = 'Files',
                             group = 'Label',
-                            action = 'Telescope find_files',
+                            action = 'Snacks find_files',
                             key = 'f',
                         },
                         {
                             desc = ' Apps',
                             group = 'DiagnosticHint',
-                            action = 'Telescope app',
+                            action = 'Snacks app',
                             key = 'a',
                         },
                         {
                             desc = ' dotfiles',
                             group = 'Number',
-                            action = 'Telescope dotfiles',
+                            action = 'Snacks dotfiles',
                             key = 'd',
                         },
                     },
