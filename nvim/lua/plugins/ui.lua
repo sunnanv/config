@@ -10,41 +10,6 @@ return {
         end,
     },
     {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = "nvim-tree/nvim-web-devicons",
-        keys = {
-            { "<leader>N", "<cmd>NvimTreeFocus<CR>" },
-            { "<leader>n", "<cmd>NvimTreeFindFile<CR>" },
-        },
-        opts = {
-            filters = {
-                git_ignored = false,
-            },
-            actions = {
-                open_file = {
-                    quit_on_open = true,
-                },
-            },
-            renderer = {
-                icons = {
-                    glyphs = {
-                        git = {
-                            untracked = "",
-                        },
-                    },
-                },
-            },
-            git = {
-                timeout = 10000
-            },
-            view = {
-                width = {
-                    max = '50%'
-                }
-            },
-        }
-    },
-    {
         "nvim-lualine/lualine.nvim",
         config = function()
             require('lualine').setup({
@@ -116,19 +81,19 @@ return {
                             icon_hl = '@variable',
                             desc = 'Files',
                             group = 'Label',
-                            action = 'Telescope find_files',
+                            action = 'Snacks find_files',
                             key = 'f',
                         },
                         {
                             desc = ' Apps',
                             group = 'DiagnosticHint',
-                            action = 'Telescope app',
+                            action = 'Snacks app',
                             key = 'a',
                         },
                         {
                             desc = ' dotfiles',
                             group = 'Number',
-                            action = 'Telescope dotfiles',
+                            action = 'Snacks dotfiles',
                             key = 'd',
                         },
                     },
