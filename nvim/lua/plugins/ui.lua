@@ -64,46 +64,6 @@ return {
         end,
     },
     {
-        'nvimdev/dashboard-nvim',
-        config = function()
-            require('dashboard').setup {
-                theme = 'hyper',
-                config = {
-                    mru = { limit = 10, label = '', cwd_only = true },
-                    project = { enable = false },
-                    week_header = {
-                        enable = true,
-                    },
-                    shortcut = {
-                        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
-                        {
-                            icon = ' ',
-                            icon_hl = '@variable',
-                            desc = 'Files',
-                            group = 'Label',
-                            action = 'Snacks find_files',
-                            key = 'f',
-                        },
-                        {
-                            desc = ' Apps',
-                            group = 'DiagnosticHint',
-                            action = 'Snacks app',
-                            key = 'a',
-                        },
-                        {
-                            desc = ' dotfiles',
-                            group = 'Number',
-                            action = 'Snacks dotfiles',
-                            key = 'd',
-                        },
-                    },
-                },
-
-            }
-        end,
-        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-    },
-    {
         'stevearc/quicker.nvim',
         event = "FileType qf",
         ---@module "quicker"

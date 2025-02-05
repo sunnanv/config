@@ -22,6 +22,7 @@ return {
             { "gr",         function() Snacks.picker.lsp_references() end,       desc = "Lsp References" },
         },
         opts = {
+            dashboard = {},
             notifier = {
             },
             picker = {
