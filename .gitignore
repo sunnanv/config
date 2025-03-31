@@ -3,3 +3,4 @@ nvim/site
 nvim/plugin
 .DS_Store
 .local-history
+Session.vim
