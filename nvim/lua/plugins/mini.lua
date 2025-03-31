@@ -2,6 +2,13 @@ return {
     {
         'echasnovski/mini.nvim',
         event = "VeryLazy",
+        keys = {
+            { '<leader>hs', 'ghgh',                                   desc = 'Stage hunk',         remap = true },
+            { '<leader>hr', 'gHgr',                                   desc = 'Reset hunk',         remap = true },
+            { '<leader>hS', 'ghaa',                                   desc = 'Stage buffer',       remap = true },
+            { '<leader>hR', 'gHaa',                                   desc = 'Reset buffer',       remap = true },
+            { '<leader>hh', function() MiniDiff.toggle_overlay() end, desc = 'Toggle diff overlay' },
+        },
         config = function()
             require('mini.comment').setup({})
             require('mini.pairs').setup()
@@ -23,9 +30,24 @@ return {
                     hex_color = hipatterns.gen_highlighter.hex_color(),
                 },
             })
-            require('mini.ai').setup()
+            require('mini.ai').setup({
+                custom_textobjects = {
+                    a = function()
+                        local from = { line = 1, col = 1 }
+                        local to = {
+                            line = vim.fn.line('$'),
+                            col = math.max(vim.fn.getline('$'):len(), 1)
+                        }
+                        return { from = from, to = to }
+                    end
+                }
+            })
             require('mini.sessions').setup()
-            require('mini.diff').setup({})
+            require('mini.diff').setup({
+                options = {
+                    wrap_goto = true,
+                }
+            })
         end,
     }
 }
