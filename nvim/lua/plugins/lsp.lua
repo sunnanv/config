@@ -160,6 +160,9 @@ return {
                         name = 'cmp-dbee', -- IMPORTANT: use the same name as you would for nvim-cmp
                         module = 'blink.compat.source',
                     }
+                },
+                per_filetype = {
+                    codecompanion = { "codecompanion" },
                 }
             },
             completion = {
