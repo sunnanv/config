@@ -72,6 +72,7 @@ ZSH_THEME="avit-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    poetry
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
@@ -118,8 +119,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-PYTHON_USER_PATH="$(python3 -m site --user-base)/bin"
-export PATH="$PATH:$PYTHON_USER_PATH"
+# PYTHON_USER_PATH="$(python3 -m site --user-base)/bin"
+# export PATH="$PATH:$PYTHON_USER_PATH"
 
 alias dev='./dev.sh'
 alias ghpr='gh pr view -w || gh pr create -w'
@@ -127,13 +128,6 @@ alias ghpr='gh pr view -w || gh pr create -w'
 # export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# export PYENV_ROOT="$HOME/.pyenv"
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
-
-
-# eval "$(pyenv virtualenv-init -)"
 
 # pnpm
 # export PNPM_HOME="/Users/johannessunnanvader/Library/pnpm"
@@ -147,3 +141,19 @@ export KITTY_LISTEN_ON=unix:/tmp/mykitty-$PPID
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 bindkey '^ ' autosuggest-accept
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+alias pshell='eval "$(poetry env activate)"'
+export PYTHONPATH="/Users/johannessunnanvader/code/kog:$PYTHONPATH"
+
+# bun completions
+[ -s "/Users/johannessunnanvader/.bun/_bun" ] && source "/Users/johannessunnanvader/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export EDITOR='nvim'

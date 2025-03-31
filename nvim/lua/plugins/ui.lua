@@ -11,8 +11,15 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
+        dependencies = {
+            "letieu/harpoon-lualine",
+        },
         config = function()
             require('lualine').setup({
+                sections = {
+                    lualine_b = { 'filename', 'diff', 'diagnostics' },
+                    lualine_c = { "harpoon2" },
+                }
             })
         end,
     },

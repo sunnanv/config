@@ -12,9 +12,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = "VeryLazy",
-        dependencies = {
-            "git@gitlab.com:schrieveslaach/sonarlint.nvim",
-        },
         config = function()
             vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>")
             vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")

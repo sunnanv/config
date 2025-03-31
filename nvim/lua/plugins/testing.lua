@@ -1,25 +1,5 @@
 return {
     {
-        -- {
-        --     "vim-test/vim-test",
-        --     config = function()
-        --         vim.g['test#strategy'] = 'floaterm'
-        --         vim.g['test#python#djangotest#options'] = '--keepdb'
-        --
-        --         local mappings = {
-        --             ['<leader>tn'] = '<cmd>TestNearest<CR>',
-        --             ['<leader>tf'] = '<cmd>TestFile<CR>',
-        --             ['<leader>ts'] = '<cmd>TestSuite<CR>',
-        --             ['<leader>tl'] = '<cmd>TestLast<CR>',
-        --             ['<leader>tv'] = '<cmd>TestVisit<CR>',
-        --         }
-        --
-        --
-        --         for keys, mapping in pairs(mappings) do
-        --             vim.api.nvim_set_keymap('n', keys, mapping, { noremap = true, silent = true })
-        --         end
-        --     end
-        -- },
         {
             "nvim-neotest/neotest",
             dependencies = {
@@ -40,8 +20,8 @@ return {
                 { '<leader>ta', function() require('neotest').run.attach() end },
                 { '<leader>tt', function() require('neotest').summary.toggle() end },
                 { '<leader>tm', function() require('neotest').summary.run_marked() end },
-                { '<leader>to', function() require('neotest').output.open({ quiet = true }) end },
-                { '<leader>tO', function() require('neotest').output.open({ quiet = true, enter = true }) end },
+                { '<leader>to', function() require('neotest').output.open({ quiet = true, enter = true }) end },
+                { '<leader>tO', function() require('neotest').output.open({ quiet = true }) end },
                 { '[t',         function() require('neotest').jump.prev({ status = 'failed' }) end },
                 { ']t',         function() require('neotest').jump.next({ status = 'failed' }) end },
             },
@@ -74,6 +54,14 @@ return {
                     summary = {
                         follow = true,
                         open = "botright vsplit | vertical resize 75"
+                    },
+                    floating = {
+                        max_width = 0.9,
+                        max_height = 0.9,
+                    },
+                    quickfix = {
+                        enabled = false,
+                        open = false
                     },
                 })
             end,
