@@ -54,30 +54,28 @@ return {
                 },
                 move = {
                     enable = true,
-                    ["]m"] = "@function.outer",
-                    ["]]"] = { query = "@class.outer", desc = "Next class start" },
-                    ["]o"] = "@loop.*",
-                    ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-                    ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+                    set_jumps = true, -- whether to set jumps in the jumplist
+                    goto_next_start = {
+                        ["]m"] = "@function.outer",
+                        ["]c"] = { query = "@class.outer", desc = "Next class start" },
+                        ["]]"] = { query = { "@class.outer", "@function.outer" }, desc = "Next function/class start" },
+                        ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+                        ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+                    },
+                    goto_next_end = {
+                        ["]M"] = "@function.outer",
+                        ["]["] = "@class.outer",
+                    },
+                    goto_previous_start = {
+                        ["[m"] = "@function.outer",
+                        ["[c"] = { query = "@class.outer", desc = "Previous class start" },
+                        ["[["] = { query = { "@class.outer", "@function.outer" }, desc = "Previous function/class start" },
+                    },
+                    goto_previous_end = {
+                        ["[M"] = "@function.outer",
+                        ["[]"] = "@class.outer",
+                    },
                 },
-                goto_next_end = {
-                    ["]M"] = "@function.outer",
-                    ["]["] = "@class.outer",
-                },
-                goto_previous_start = {
-                    ["[m"] = "@function.outer",
-                    ["[["] = "@class.outer",
-                },
-                goto_previous_end = {
-                    ["[M"] = "@function.outer",
-                    ["[]"] = "@class.outer",
-                },
-                goto_next = {
-                    ["]d"] = "@conditional.outer",
-                },
-                goto_previous = {
-                    ["[d"] = "@conditional.outer",
-                }
             },
         },
         config = function(_, opts)

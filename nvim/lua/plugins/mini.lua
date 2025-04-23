@@ -4,7 +4,7 @@ return {
         event = "VeryLazy",
         keys = {
             { '<leader>hs', 'ghgh',                                   desc = 'Stage hunk',         remap = true },
-            { '<leader>hr', 'gHgr',                                   desc = 'Reset hunk',         remap = true },
+            { '<leader>hr', 'gHgh',                                   desc = 'Reset hunk',         remap = true },
             { '<leader>hS', 'ghaa',                                   desc = 'Stage buffer',       remap = true },
             { '<leader>hR', 'gHaa',                                   desc = 'Reset buffer',       remap = true },
             { '<leader>hh', function() MiniDiff.toggle_overlay() end, desc = 'Toggle diff overlay' },
@@ -14,11 +14,6 @@ return {
             require('mini.pairs').setup()
             require('mini.surround').setup()
             require('mini.cursorword').setup()
-            require('mini.indentscope').setup({
-                draw = {
-                    animation = require('mini.indentscope').gen_animation.none()
-                },
-            })
 
             local hipatterns = require('mini.hipatterns')
             hipatterns.setup({
@@ -48,6 +43,14 @@ return {
                     wrap_goto = true,
                 }
             })
+            -- require('mini.animate').setup()
+            require('mini.jump2d').setup()
+            require('mini.jump').setup({
+                mappings = {
+                    repeat_jump = "'"
+                }
+            })
+            -- require('mini.bracketed').setup()
         end,
     }
 }

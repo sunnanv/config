@@ -77,63 +77,6 @@ return {
         event = "VeryLazy",
     },
     {
-        "smoka7/hop.nvim",
-        version = "*",
-        keys = {
-            {
-                "f",
-                function()
-                    require("hop").hint_char1({
-                        direction = require("hop.hint").HintDirection.AFTER_CURSOR,
-                        current_line_only = true,
-                    })
-                end,
-            },
-            {
-                "F",
-                function()
-                    require("hop").hint_char1({
-                        direction = require("hop.hint").HintDirection.BEFORE_CURSOR,
-                        current_line_only = true,
-                    })
-                end,
-            },
-            {
-                "t",
-                function()
-                    require("hop").hint_char1({
-                        direction = require("hop.hint").HintDirection.AFTER_CURSOR,
-                        current_line_only = true,
-                        hint_offset = -1,
-                    })
-                end,
-            },
-            {
-                "T",
-                function()
-                    require("hop").hint_char1({
-                        direction = require("hop.hint").HintDirection.BEFORE_CURSOR,
-                        current_line_only = true,
-                        hint_offset = 1,
-                    })
-                end,
-            },
-            {
-                "s",
-                function()
-                    require("hop").hint_words({ direction = require("hop.hint").HintDirection.AFTER_CURSOR })
-                end,
-            },
-            {
-                "S",
-                function()
-                    require("hop").hint_words({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR })
-                end,
-            },
-        },
-        opts = {},
-    },
-    {
         "gbprod/yanky.nvim",
         event = "VeryLazy",
         config = function()
@@ -173,22 +116,11 @@ return {
             }
         },
     },
-
-    -- {
-    --     "smjonas/inc-rename.nvim",
-    --     config = function()
-    --         require("inc_rename").setup()
-    --         vim.keymap.set("n", "rn", function()
-    --             return ":IncRename " .. vim.fn.expand("<cword>")
-    --         end, { expr = true })
-    --     end,
-    -- },
     {
         "ranelpadon/python-copy-reference.vim"
     },
     {
         'mawkler/demicolon.nvim',
-        -- keys = { ';', ',', 't', 'f', 'T', 'F', ']', '[', ']d', '[d' }, -- Uncomment this to lazy load
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-treesitter/nvim-treesitter-textobjects',
