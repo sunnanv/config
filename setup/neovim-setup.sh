@@ -7,15 +7,15 @@ if [ "$OS" = "MAC" ]; then
 	brew install $DEPENDENCIES
 fi
 
-# npm i -g neovim 
+npm i -g neovim 
 
-# mkdir -p ~/.local/venv
-# (cd ~/.local/venv &&
-# 	python3 -m venv nvim &&
-# 	cd nvim &&
-# 	. ./bin/activate &&
-# 	pip install pynvim black debugpy django-stubs &&
-# 	exit)
+mkdir -p ~/.local/venv
+(cd ~/.local/venv &&
+	python3 -m venv nvim &&
+	cd nvim &&
+	. ./bin/activate &&
+	pip install pynvim &&
+	exit)
 
 if ! [ -x "$(command -v nvim)" ] || [ $OVERRIDE ]; then
 	echo "Setting up Neovim"
