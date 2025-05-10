@@ -10,7 +10,6 @@ return {
             { '<leader>hh', function() MiniDiff.toggle_overlay() end, desc = 'Toggle diff overlay' },
         },
         config = function()
-            require('mini.comment').setup({})
             require('mini.pairs').setup()
             require('mini.surround').setup()
             require('mini.cursorword').setup()
@@ -43,14 +42,17 @@ return {
                     wrap_goto = true,
                 }
             })
-            -- require('mini.animate').setup()
             require('mini.jump2d').setup()
             require('mini.jump').setup({
                 mappings = {
                     repeat_jump = "'"
                 }
             })
-            -- require('mini.bracketed').setup()
         end,
+    },
+    {
+        'numToStr/Comment.nvim',
+        opts = {
+        }
     }
 }

@@ -125,15 +125,6 @@ return {
             'nvim-treesitter/nvim-treesitter',
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
-        opts = {
-            integrations = {
-                gitsigns = {
-                    keymaps = {
-                        next = ']h',
-                        prev = '[h',
-                    }
-                }
-            }
-        }
+        opts = {}
     }
 }

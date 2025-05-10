@@ -37,10 +37,23 @@ return {
                     vim.keymap.set({ "n", "x" }, "<leader>f", format)
                 end,
             })
+            vim.lsp.config('ts_ls', {
+                init_options = {
+                    plugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            location =
+                            "/Users/johannessunnanvader/.nvm/versions/node/v22.11.0/lib/node_modules/@vue/typescript-plugin",
+                            languages = { "javascript", "typescript", "vue" },
+                        },
+                    },
+                },
+                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+            })
         end,
     },
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         cmd = "Mason",
         opts = {
             registries = {
@@ -49,69 +62,11 @@ return {
         },
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         event = "VeryLazy",
         dependencies = {
             "saghen/blink.cmp",
             "neovim/nvim-lspconfig",
-        },
-        opts = {
-            handlers = {
-                function(server)
-                    require("lspconfig")[server].setup({
-                        capabilities = require('blink.cmp').get_lsp_capabilities(),
-                    })
-                end,
-                lua_ls = function()
-                    require("lspconfig").lua_ls.setup({
-                        capabilities = require('blink.cmp').get_lsp_capabilities(),
-                        settings = {
-                            Lua = {
-                                runtime = {
-                                    version = "LuaJIT",
-                                },
-                                diagnostics = {
-                                    globals = { "vim" },
-                                },
-                                workspace = {
-                                    library = {
-                                        vim.env.VIMRUNTIME,
-                                    },
-                                },
-                            },
-                        },
-                    })
-                end,
-                ts_ls = function()
-                    require("lspconfig").ts_ls.setup({
-                        capabilities = require('blink.cmp').get_lsp_capabilities(),
-                        init_options = {
-                            plugins = {
-                                {
-                                    name = "@vue/typescript-plugin",
-                                    location =
-                                    "/Users/johannessunnanvader/.nvm/versions/node/v20.11.0/lib/node_modules/@vue/typescript-plugin",
-                                    languages = { "javascript", "typescript", "vue" },
-                                },
-                            },
-                        },
-                        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-                    })
-                end,
-                eslint = function()
-                    require("lspconfig").eslint.setup({
-                        capabilities = require('blink.cmp').get_lsp_capabilities(),
-                        root_dir = require("lspconfig/util").root_pattern(
-                            ".git",
-                            ".eslintrc",
-                            ".eslintrc.js",
-                            ".eslintrc.json",
-                            ".eslintrc.yaml",
-                            ".eslintrc.yml"
-                        ),
-                    })
-                end,
-            },
         },
     },
     {

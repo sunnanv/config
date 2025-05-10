@@ -1,6 +1,6 @@
 return {
     {
-        "epwalsh/obsidian.nvim",
+        "obsidian-nvim/obsidian.nvim",
         version = "*",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -8,10 +8,12 @@ return {
         cmd = { "ObsidianToday", "ObsidianQuickSwitch", "ObsidianFind", "ObsidianTags", "ObsidianDailies", "ObsidianOpen" },
         keys = {
             { "<leader>oo", ":ObsidianToday<cr>" },
+            { "<leader>op", ":ObsidianTomorrow<cr>" },
             { "<leader>oq", ":ObsidianQuickSwitch<cr>" },
             { "<leader>of", ":ObsidianFind<cr>" },
             { "<leader>ot", ":ObsidianTags<cr>" },
-            { "<leader>od", ":ObsidianQuickSwitch diary<cr>" },
+            { "<leader>od", ":ObsidianDailies<cr>" },
+            -- { "<leader>od", ":ObsidianQuickSwitch diary<cr>" },
         },
         opts = {
             workspaces = {
@@ -35,29 +37,6 @@ return {
                 -- A map for custom variables, the key should be the variable and the value a function
                 substitutions = {},
             },
-            mappings = {
-                -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-                ["gf"] = {
-                    action = function()
-                        return require("obsidian").util.gf_passthrough()
-                    end,
-                    opts = { noremap = false, expr = true, buffer = true },
-                },
-                -- Toggle check-boxes.
-                ["<leader>ch"] = {
-                    action = function()
-                        return require("obsidian").util.toggle_checkbox()
-                    end,
-                    opts = { buffer = true },
-                },
-                -- Smart action depending on context, either follow link or toggle checkbox.
-                ["<cr>"] = {
-                    action = function()
-                        return require("obsidian").util.smart_action()
-                    end,
-                    opts = { buffer = true, expr = true },
-                },
-            },
             follow_url_func = function(url)
                 vim.fn.jobstart({ "open", url }) -- Mac OS
             end,
@@ -65,14 +44,26 @@ return {
                 vim.fn.jobstart({ "qlmanage", "-p", img }) -- Mac OS quick look preview
             end,
             ui = {
-                enable = false,
+                enable = true,
                 checkboxes = {
                     [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
                     ["x"] = { char = "", hl_group = "ObsidianDone" },
-                    ["~"] = { char = "", hl_group = "ObsidianRightArrow" },
-                    ["o"] = { char = "󰰱", hl_group = "ObsidianTilde" },
                     ["-"] = { char = "", hl_group = "ObsidianTodo" },
+                    [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+                    ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+                    ["!"] = { char = "", hl_group = "ObsidianImportant" },
                 },
+            },
+            picker = {
+                name = "snacks.pick",
+            },
+            completion = {
+                -- Enables completion using nvim_cmp
+                nvim_cmp = false,
+                -- Enables completion using blink.cmp
+                blink = true,
+                -- Trigger completion at 2 chars.
+                min_chars = 2,
             },
         },
     },

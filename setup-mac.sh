@@ -26,6 +26,6 @@ NONINTERACTIVE=1 brew install $DEPENDENCIES
 ./setup/font-setup.sh
 ./setup/oh-my-zsh-setup.sh
 ./setup/neovim-setup.sh
-./setup/kitty-setup.sh
+# ./setup/kitty-setup.sh
 
 

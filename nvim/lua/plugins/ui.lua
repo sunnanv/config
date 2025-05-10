@@ -61,12 +61,63 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons"
         },
-        config = function()
+        config = function(_, opts)
             local presets = require("markview.presets")
 
             require("markview").setup({
-                checkboxes = presets.checkboxes.nerd,
-                headings = presets.headings.slanted,
+                markdown = {
+                    list_items = {
+                        shift_width = function(buffer, item)
+                            local parent_indnet = math.max(1, item.indent - vim.bo[buffer].shiftwidth);
+                            return (item.indent) * (1 / (parent_indnet * 2));
+                        end,
+                        marker_minus = {
+                            add_padding = function(_, item)
+                                return item.indent > 1;
+                            end
+                        }
+                    },
+                    headings = presets.headings.glow,
+                    block_quotes = {
+                        enable = true,
+                        wrap = true,
+
+                        default = {
+                            border = "▋", hl = "MarkviewBlockQuoteDefault"
+                        },
+
+                        ["INPROGRESS"] = {
+                            hl = "MarkviewBlockQuoteNote",
+                            preview = "󰲽 In Progress",
+
+                            title = true,
+                            icon = "󰲽",
+
+                            border = "▋"
+                        },
+                        ["REVIEW"] = {
+                            hl = "MarkviewBlockQuoteWarn",
+                            preview = " Review",
+
+                            title = true,
+                            icon = "",
+
+                            border = "▋"
+                        },
+                        ["TESTING"] = {
+                            hl = "MarkviewBlockQuoteSpecial",
+                            preview = "󰙨 Testing",
+
+                            title = true,
+                            icon = "󰙨",
+
+                            border = "▋"
+                        },
+                    }
+                },
+                preview = {
+                    icon_provider = "devicons"
+                },
             })
         end,
     },
@@ -165,5 +216,5 @@ return {
             end
             require('ufo').setup()
         end
-    }
+    },
 }
