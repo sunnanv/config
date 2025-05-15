@@ -37,6 +37,20 @@ return {
                     vim.keymap.set({ "n", "x" }, "<leader>f", format)
                 end,
             })
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client == nil then
+                        return
+                    end
+                    if client.name == 'ruff' then
+                        -- Disable hover in favor of Pyright
+                        client.server_capabilities.hoverProvider = false
+                    end
+                end,
+                desc = 'LSP: Disable hover capability from Ruff',
+            })
             vim.lsp.config('ts_ls', {
                 init_options = {
                     plugins = {
@@ -82,13 +96,17 @@ return {
     {
         'saghen/blink.cmp',
         lazy = false,
-        dependencies = { 'rafamadriz/friendly-snippets', {
-            "MattiasMTS/cmp-dbee",
-            dependencies = {
-                { "kndndrj/nvim-dbee" }
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+            {
+                "MattiasMTS/cmp-dbee",
+                dependencies = {
+                    { "kndndrj/nvim-dbee" }
+                },
+                opts = {}, -- needed
             },
-            opts = {}, -- needed
-        }, },
+            'Kaiser-Yang/blink-cmp-avante',
+        },
 
         version = '*',
         ---@module 'blink.cmp'
@@ -108,12 +126,17 @@ return {
             },
             sources = {
                 default =
-                { 'lsp', 'path', 'snippets', 'buffer', 'dbee' },
+                { 'avante', 'lsp', 'path', 'snippets', 'buffer', 'dbee' },
                 providers = {
                     dbee = {
                         name = 'cmp-dbee', -- IMPORTANT: use the same name as you would for nvim-cmp
                         module = 'blink.compat.source',
-                    }
+                    },
+                    avante = {
+                        name = 'Avante',
+                        module = 'blink-cmp-avante'
+
+                    },
                 },
                 per_filetype = {
                     codecompanion = { "codecompanion" },
@@ -159,10 +182,18 @@ return {
                     -- Opt to list sources here, when available in mason.
                 },
                 automatic_installation = false,
-                handlers = {},
+                handlers = {
+                    autoflake = function(source_name, methods)
+                        require('mason-null-ls').default_setup(source_name, methods)
+                    end,
+                },
             })
             local null_ls = require("null-ls")
             null_ls.setup({
+                sources = {
+                    require("none-ls.formatting.ruff"),        -- requires none-ls-extras.nvim
+                    require("none-ls.formatting.ruff_format"), -- requires none-ls-extras.nvim
+                }
             })
         end,
     }
