@@ -7,6 +7,9 @@ return {
             -- add any opts here
             -- for example
             provider = "copilot",
+            copilot = {
+                model = 'claude-3.7-sonnet'
+            },
             selector = {
                 provider = "snacks"
             }
