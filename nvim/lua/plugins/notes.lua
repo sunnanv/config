@@ -7,13 +7,14 @@ return {
         },
         cmd = { "ObsidianToday", "ObsidianQuickSwitch", "ObsidianFind", "ObsidianTags", "ObsidianDailies", "ObsidianOpen" },
         keys = {
-            { "<leader>oo", ":ObsidianToday<cr>" },
-            { "<leader>op", ":ObsidianTomorrow<cr>" },
+            { "<leader>oi", ":ObsidianYesterday<cr>",                     "Obsidian Yesterday" },
+            { "<leader>oo", ":ObsidianToday<cr>",                         "Obsidian Today" },
+            { "<leader>op", ":ObsidianTomorrow<cr>",                      "Obsidian Tomorrow" },
+            { "<leader>ot", ":ObsidianQuickSwitch todo-archive<cr>",      "Obisidian Todo" },
+            { "<leader>on", ":ObsidianQuickSwitch notes-archive<cr>",     "Obisidian Notes" },
+            { "<leader>ol", ":ObsidianQuickSwitch learnings-archive<cr>", "Obisidian Learnings" },
             { "<leader>oq", ":ObsidianQuickSwitch<cr>" },
-            { "<leader>of", ":ObsidianFind<cr>" },
-            { "<leader>ot", ":ObsidianTags<cr>" },
             { "<leader>od", ":ObsidianDailies<cr>" },
-            -- { "<leader>od", ":ObsidianQuickSwitch diary<cr>" },
         },
         opts = {
             workspaces = {

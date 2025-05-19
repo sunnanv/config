@@ -7,11 +7,28 @@ return {
             -- add any opts here
             -- for example
             provider = "copilot",
-            copilot = {
-                model = 'claude-3.7-sonnet'
+            vendors = {
+                ["copilot-4o"] = {
+                    __inherited_from = "copilot",
+                    model = 'gpt-4o'
+                },
+                ["copilot-claude-3.7-sonnet"] = {
+                    __inherited_from = "copilot",
+                    model = 'claude-3.7-sonnet'
+                },
+                ["copilot-claude-3.7-sonnet-thought"] = {
+                    __inherited_from = "copilot",
+                    model = 'claude-3.7-sonnet-thought'
+                }
             },
             selector = {
                 provider = "snacks"
+            },
+            file_selector = {
+                provider = "snacks"
+            },
+            web_search_engine = {
+                provider = "google",
             }
 
         },

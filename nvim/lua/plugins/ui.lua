@@ -131,13 +131,13 @@ return {
     --         })
     --     end,
     -- },
-    {
-        'stevearc/quicker.nvim',
-        event = "FileType qf",
-        ---@module "quicker"
-        ---@type quicker.SetupOptions
-        opts = {},
-    },
+    -- {
+    --     'stevearc/quicker.nvim',
+    --     event = "FileType qf",
+    --     ---@module "quicker"
+    --     ---@type quicker.SetupOptions
+    --     opts = {},
+    -- },
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -174,6 +174,18 @@ return {
                 desc = "Quickfix List (Trouble)",
             },
         },
+        init = function()
+            vim.api.nvim_create_autocmd("BufRead", {
+                callback = function(ev)
+                    if vim.bo[ev.buf].buftype == "quickfix" then
+                        vim.schedule(function()
+                            vim.cmd([[cclose]])
+                            vim.cmd([[Trouble qflist open]])
+                        end)
+                    end
+                end,
+            })
+        end
     },
     {
         'kevinhwang91/nvim-ufo',
