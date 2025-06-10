@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="avit-custom"
+ZSH_THEME="avit"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -83,7 +83,6 @@ plugins=(
     # jsontools
     vi-mode
     alias-finder
-    pyautoenv
 )
 # autoenv
 source $ZSH/oh-my-zsh.sh
@@ -157,3 +156,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export EDITOR='nvim'
+
+# Created by `pipx` on 2025-05-20 05:53:12
+export PATH="$PATH:/Users/johannes.sunnanvader/.local/bin"

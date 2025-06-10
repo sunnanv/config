@@ -24,7 +24,8 @@ return {
                         vim.lsp.buf.format({
                             async = true,
                             filter = function(client)
-                                local can_format = client.name ~= "volar" and client.name ~= "ts_ls"
+                                local can_format = client.name ~= "volar" and client.name ~= "ts_ls" and
+                                    client.name ~= "vue_ls"
                                 return can_format
                             end,
                         })
@@ -37,33 +38,33 @@ return {
                     vim.keymap.set({ "n", "x" }, "<leader>f", format)
                 end,
             })
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
-                callback = function(args)
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client == nil then
-                        return
-                    end
-                    if client.name == 'ruff' then
-                        -- Disable hover in favor of Pyright
-                        client.server_capabilities.hoverProvider = false
-                    end
-                end,
-                desc = 'LSP: Disable hover capability from Ruff',
-            })
             vim.lsp.config('ts_ls', {
                 init_options = {
                     plugins = {
                         {
                             name = "@vue/typescript-plugin",
                             location =
-                            "/Users/johannessunnanvader/.nvm/versions/node/v22.11.0/lib/node_modules/@vue/typescript-plugin",
+                            "/Users/johannes.sunnanvader/.nvm/versions/node/v22.15.1/lib/node_modules/@vue/typescript-plugin",
                             languages = { "javascript", "typescript", "vue" },
                         },
                     },
                 },
                 filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
             })
+            vim.lsp.config('stylelint_lsp', {
+                settings = {
+                    stylelintplus = {
+                        autoFixOnFormat = true,
+                    },
+                }
+            })
+
+            vim.api.nvim_create_user_command('RestartLsp', function()
+                local clients = vim.lsp.get_clients { bufnr = 0 }
+                vim.lsp.stop_client(clients)
+                vim.cmd.update()
+                vim.defer_fn(vim.cmd.edit, 1000)
+            end, { desc = 'Restart LSP servers' })
         end,
     },
     {
@@ -191,8 +192,6 @@ return {
             local null_ls = require("null-ls")
             null_ls.setup({
                 sources = {
-                    require("none-ls.formatting.ruff"),        -- requires none-ls-extras.nvim
-                    require("none-ls.formatting.ruff_format"), -- requires none-ls-extras.nvim
                 }
             })
         end,

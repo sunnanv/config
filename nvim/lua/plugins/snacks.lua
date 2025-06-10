@@ -14,10 +14,12 @@ return {
             { "<leader>N",  function() Snacks.picker.explorer({ auto_close = false }) end, desc = "Explorer" },
             { "ff",         function() Snacks.picker.smart() end,                          desc = "Files" },
             { "fg",         function() Snacks.picker.grep() end,                           desc = "Grep" },
+            { "fw",         function() Snacks.picker.grep_word() end,                      desc = "Grep word" },
             { "fs",         function() Snacks.picker.git_status() end,                     desc = "Git Status" },
             { "fb",         function() Snacks.picker.git_branches() end,                   desc = "Branches" },
             { "fr",         function() Snacks.picker.resume() end,                         desc = "Resume" },
-            { "fh",         function() Snacks.picker.recent() end,                         desc = "Recent" },
+            { "fh",         function() Snacks.picker.recent({ filter = { cwd = true } }) end, desc = "Recent" },
+            { "fb",         function() Snacks.picker.buffers() end,                        desc = "Buffers" },
             { "gd",         function() Snacks.picker.lsp_definitions() end,                desc = "Lsp Definitions" },
             { "gt",         function() Snacks.picker.lsp_type_definitions() end,           desc = "Lsp Type Definitions" },
             { "gi",         function() Snacks.picker.lsp_implementations() end,            desc = "Lsp Implementations" },
@@ -41,5 +43,15 @@ return {
             statuscolumn = {},
             indent = { enabled = true },
         },
+        init = function(_, opts)
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "VeryLazy",
+                callback = function()
+                    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+                    Snacks.toggle.inlay_hints():map("<leader>uh")
+                    Snacks.toggle.dim():map("<leader>uD")
+                end,
+            })
+        end,
     }
 }

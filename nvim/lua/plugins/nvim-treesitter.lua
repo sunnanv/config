@@ -3,6 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
+            "terryma/vim-expand-region",
             {
                 "nvim-treesitter/nvim-treesitter-context",
                 opts = {
