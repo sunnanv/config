@@ -65,6 +65,27 @@ return {
                 vim.cmd.update()
                 vim.defer_fn(vim.cmd.edit, 1000)
             end, { desc = 'Restart LSP servers' })
+
+            local vue_language_server_path = vim.fn.expand '$MASON/packages' ..
+                '/vue-language-server' .. '/node_modules/@vue/language-server'
+            local vue_plugin = {
+                name = '@vue/typescript-plugin',
+                location = vue_language_server_path,
+                languages = { 'vue' },
+                configNamespace = 'typescript',
+            }
+            vim.lsp.config('vtsls', {
+                settings = {
+                    vtsls = {
+                        tsserver = {
+                            globalPlugins = {
+                                vue_plugin,
+                            },
+                        },
+                    },
+                },
+                filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+            })
         end,
     },
     {
@@ -107,6 +128,7 @@ return {
                 opts = {}, -- needed
             },
             'Kaiser-Yang/blink-cmp-avante',
+            'moyiz/blink-emoji.nvim',
         },
 
         version = '*',
@@ -127,7 +149,7 @@ return {
             },
             sources = {
                 default =
-                { 'avante', 'lsp', 'path', 'snippets', 'buffer', 'dbee' },
+                { 'avante', 'lsp', 'path', 'snippets', 'buffer', 'dbee', 'emoji' },
                 providers = {
                     dbee = {
                         name = 'cmp-dbee', -- IMPORTANT: use the same name as you would for nvim-cmp
@@ -136,7 +158,10 @@ return {
                     avante = {
                         name = 'Avante',
                         module = 'blink-cmp-avante'
-
+                    },
+                    emoji = {
+                        name = 'Emoji',
+                        module = 'blink-emoji',
                     },
                 },
                 per_filetype = {
@@ -196,5 +221,11 @@ return {
                 }
             })
         end,
+    },
+    {
+        'dmmulroy/ts-error-translator.nvim',
+        opts = {}
     }
+
+
 }
