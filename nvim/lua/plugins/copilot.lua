@@ -1,7 +1,9 @@
 return {
     {
         "zbirenbaum/copilot.lua",
-        event = "VeryLazy",
+        requires = {
+            "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+        },
         opts = {
             panel = {
                 enabled = true,
@@ -17,15 +19,4 @@ return {
             }
         }
     },
-    {
-        "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "canary",
-        cmd = "CopilotChat",
-        dependencies = {
-            { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-            { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
-        },
-        build = "make tiktoken",          -- Only on MacOS or Linux
-        config = true,
-    }
 }
