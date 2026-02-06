@@ -78,20 +78,34 @@ return {
         }
     },
     {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {
-            file_types = { "markdown", "codecompanion" },
-        },
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
+    {
+        "OXY2DEV/markview.nvim",
         ft = { "markdown", "Avante" },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+        config = function(_, opts)
+            require("markview").setup({
+                preview = {
+                    icon_provider = "devicons"
+                },
+            })
+        end,
     },
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
         cmd = "Trouble",
-       keys = {
+        keys = {
             {
                 "<leader>xx",
                 "<cmd>Trouble diagnostics toggle<cr>",
@@ -195,5 +209,14 @@ return {
             require("nvim-surround").setup({
             })
         end
+    },
+    {
+        "mistricky/codesnap.nvim",
+        build = "make",
+        cmd = { "CodeSnap", "CodeSnapSave" },
+        opts = {
+            bg_padding = 0,
+            mac_window_bar = false,
+        },
     }
 }

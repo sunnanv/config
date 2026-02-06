@@ -24,6 +24,7 @@ return {
                 { '<leader>tm', function() require('neotest').summary.run_marked() end },
                 { '<leader>to', function() require('neotest').output.open({ quiet = true, enter = true }) end },
                 { '<leader>tO', function() require('neotest').output.open({ quiet = true }) end },
+                { '<leader>tp', function() require('neotest').output_panel.toggle() end },
                 { '[t',         function() require('neotest').jump.prev({ status = 'failed' }) end },
                 { ']t',         function() require('neotest').jump.next({ status = 'failed' }) end },
             },
@@ -59,6 +60,11 @@ return {
                         enabled = false,
                         open = false
                     },
+                    output_panel = {
+                        enabled = true,
+                        open = "botright vsplit | vertical resize 75"
+                    },
+
                 })
             end,
         },
