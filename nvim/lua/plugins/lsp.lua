@@ -117,13 +117,6 @@ return {
         lazy = false,
         dependencies = {
             'rafamadriz/friendly-snippets',
-            {
-                "MattiasMTS/cmp-dbee",
-                dependencies = {
-                    { "kndndrj/nvim-dbee" }
-                },
-                opts = {}, -- needed
-            },
             'Kaiser-Yang/blink-cmp-avante',
             'moyiz/blink-emoji.nvim',
         },
@@ -146,12 +139,8 @@ return {
             },
             sources = {
                 default =
-                { 'avante', 'lsp', 'path', 'snippets', 'buffer', 'dbee', 'emoji' },
+                { 'avante', 'lsp', 'path', 'snippets', 'buffer', 'emoji' },
                 providers = {
-                    dbee = {
-                        name = 'cmp-dbee', -- IMPORTANT: use the same name as you would for nvim-cmp
-                        module = 'blink.compat.source',
-                    },
                     avante = {
                         name = 'Avante',
                         module = 'blink-cmp-avante'

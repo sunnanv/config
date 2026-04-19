@@ -45,7 +45,6 @@ return {
                     wrap_goto = true,
                 }
             })
-            -- require('mini.animate').setup({})
         end,
     },
     {
