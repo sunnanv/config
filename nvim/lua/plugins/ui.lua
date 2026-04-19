@@ -1,13 +1,34 @@
 return {
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     priority = 1000,
+    --     config = function()
+    --         -- require('tokyonight').setup({
+    --         --     style = 'storm',
+    --         -- })
+    --         -- vim.cmd [[colorscheme tokyonight]]
+    --     end,
+    -- },
     {
-        "folke/tokyonight.nvim",
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
-        config = function()
-            require('tokyonight').setup({
-                style = 'storm',
-            })
-            vim.cmd [[colorscheme tokyonight]]
-        end,
+        opts = {
+            integrations = {
+                neotest = true,
+                blink_cmp = true,
+                harpoon = true,
+                noice = true,
+                snacks = {
+                    enabled = true,
+                },
+                lsp_trouble = true,
+                which_key = true,
+            },
+        },
+        init = function()
+            vim.cmd.colorscheme "catppuccin-frappe"
+        end
     },
     {
         "nvim-lualine/lualine.nvim",

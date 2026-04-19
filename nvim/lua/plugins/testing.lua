@@ -5,6 +5,7 @@ return {
             dependencies = {
                 "nvim-neotest/nvim-nio",
                 "nvim-lua/plenary.nvim",
+                "antoinemadec/FixCursorHold.nvim",
                 "nvim-treesitter/nvim-treesitter",
                 "nvim-neotest/neotest-python",
                 "nvim-neotest/neotest-jest",
@@ -30,7 +31,7 @@ return {
 
                 neotest.setup({
                     discovery = {
-                        enabled = false,
+                        enabled = true,
                     },
                     adapters = {
                         require("neotest-python")({
@@ -38,17 +39,11 @@ return {
                             args = { "--keepdb" },
                         }),
                         require("neotest-jest")({
-                            filter_dir = function(name, rel_path, root)
-                                return name ~= "node_modules"
-                            end,
                         }),
                         require("neotest-vim-test")({
                             ignore_file_types = { "python" },
                         }),
                         require('neotest-vitest')({
-                            filter_dir = function(name, rel_path, root)
-                                return name ~= "node_modules"
-                            end,
                         })
                     },
                     summary = {

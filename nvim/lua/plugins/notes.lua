@@ -22,10 +22,10 @@ return {
                     name = "work",
                     path = "~/vaults/work",
                 },
-                {
-                    name = "personal",
-                    path = "~/vaults/personal",
-                },
+                -- {
+                --     name = "personal",
+                --     path = "~/vaults/personal",
+                -- },
             },
             daily_notes = {
                 folder = "dailies",

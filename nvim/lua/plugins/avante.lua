@@ -4,23 +4,8 @@ return {
         event = "VeryLazy",
         version = false, -- Never set this value to "*"! Never!
         opts = {
-            -- add any opts here
-            -- for example
+            mode = "legacy",
             provider = "copilot",
-            vendors = {
-                ["copilot-4o"] = {
-                    __inherited_from = "copilot",
-                    model = 'gpt-4o'
-                },
-                ["copilot-claude-3.7-sonnet"] = {
-                    __inherited_from = "copilot",
-                    model = 'claude-3.7-sonnet'
-                },
-                ["copilot-claude-3.7-sonnet-thought"] = {
-                    __inherited_from = "copilot",
-                    model = 'claude-3.7-sonnet-thought'
-                }
-            },
             selector = {
                 provider = "snacks"
             },
@@ -29,12 +14,16 @@ return {
             },
             web_search_engine = {
                 provider = "google",
-            }
-
+            },
+            input = {
+                provider = "snacks",
+                provider_opts = {
+                    title = "Avante Input",
+                    icon = " ",
+                },
+            },
         },
-        -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",
-        -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "stevearc/dressing.nvim",
@@ -44,7 +33,6 @@ return {
             "nvim-tree/nvim-web-devicons",
             "zbirenbaum/copilot.lua", -- for providers='copilot'
             {
-                -- Make sure to set this up properly if you have lazy=true
                 'MeanderingProgrammer/render-markdown.nvim',
                 opts = {
                     file_types = { "markdown", "Avante" },
