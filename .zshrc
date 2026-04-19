@@ -159,3 +159,5 @@ export EDITOR='nvim'
 
 # Created by `pipx` on 2025-05-20 05:53:12
 export PATH="$PATH:/Users/johannes.sunnanvader/.local/bin"
+
+source .keys

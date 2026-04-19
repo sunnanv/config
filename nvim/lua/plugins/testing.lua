@@ -12,7 +12,7 @@ return {
                 "nvim-neotest/neotest-vim-test",
                 "marilari88/neotest-vitest",
             },
-            lazy = true,
+            event = 'VeryLazy',
             keys = {
                 { '<leader>tn', function() require('neotest').run.run() end },
                 { '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end, },
