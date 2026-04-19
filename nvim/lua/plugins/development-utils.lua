@@ -94,13 +94,6 @@ return {
         end,
     },
     {
-        "folke/zen-mode.nvim",
-        keys = {
-            { "<leader>zz", "<cmd>ZenMode<CR>" },
-        },
-        opts = {},
-    },
-    {
         "saecki/live-rename.nvim",
         keys = {
             { "rn", function() require('live-rename').rename() end },
@@ -126,11 +119,5 @@ return {
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         opts = {}
-    },
-    {
-        "m4xshen/hardtime.nvim",
-        lazy = false,
-        dependencies = { "MunifTanjim/nui.nvim" },
-        opts = {},
     },
 }

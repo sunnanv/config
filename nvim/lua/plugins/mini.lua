@@ -11,7 +11,6 @@ return {
         },
         config = function()
             require('mini.pairs').setup()
-            require('mini.surround').setup()
             require('mini.cursorword').setup()
 
             local hipatterns = require('mini.hipatterns')
@@ -46,13 +45,7 @@ return {
                     wrap_goto = true,
                 }
             })
-            -- require('mini.jump2d').setup()
-            -- require('mini.jump').setup({
-            --     mappings = {
-            --         repeat_jump = "'"
-            --     }
-            -- })
-            require('mini.animate').setup({})
+            -- require('mini.animate').setup({})
         end,
     },
     {

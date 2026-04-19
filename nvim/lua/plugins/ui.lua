@@ -17,37 +17,6 @@ return {
             vim.cmd("colorscheme nordfox")
         end,
     },
-    -- {
-    --     "folke/tokyonight.nvim",
-    --     priority = 1000,
-    --     config = function()
-    --         -- require('tokyonight').setup({
-    --         --     style = 'storm',
-    --         -- })
-    --         -- vim.cmd [[colorscheme tokyonight]]
-    --     end,
-    -- },
-    -- {
-    --     "catppuccin/nvim",
-    --     name = "catppuccin",
-    --     priority = 1000,
-    --     opts = {
-    --         integrations = {
-    --             neotest = true,
-    --             blink_cmp = true,
-    --             harpoon = true,
-    --             noice = true,
-    --             snacks = {
-    --                 enabled = true,
-    --             },
-    --             lsp_trouble = true,
-    --             which_key = true,
-    --         },
-    --     },
-    --     init = function()
-    --         -- vim.cmd.colorscheme "catppuccin-frappe"
-    --     end
-    -- },
     {
         "nvim-lualine/lualine.nvim",
         dependencies = {
@@ -57,7 +26,22 @@ return {
             require('lualine').setup({
                 sections = {
                     lualine_b = { 'filename', 'diff', 'diagnostics' },
-                    lualine_c = { "harpoon2" },
+                    lualine_c = { {
+                        function()
+                            return " "
+                        end,
+                        color = function()
+                            local status = require("sidekick.status").get()
+                            if status then
+                                return status.kind == "Error" and "DiagnosticError" or status.busy and "DiagnosticWarn" or
+                                    "Special"
+                            end
+                        end,
+                        cond = function()
+                            local status = require("sidekick.status")
+                            return status.get() ~= nil
+                        end,
+                    }, "harpoon2" },
                 }
             })
         end,
@@ -99,89 +83,15 @@ return {
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {
-            file_types = { "markdown", "Avante" },
+            file_types = { "markdown", "codecompanion" },
         },
         ft = { "markdown", "Avante" },
     },
-    -- {
-    --     "OXY2DEV/markview.nvim",
-    --     ft = { "markdown", "Avante" },
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "nvim-tree/nvim-web-devicons"
-    --     },
-    --     config = function(_, opts)
-    --         local presets = require("markview.presets")
-    --
-    --         require("markview").setup({
-    --             markdown = {
-    --                 list_items = {
-    --                     shift_width = function(buffer, item)
-    --                         local parent_indnet = math.max(1, item.indent - vim.bo[buffer].shiftwidth);
-    --                         return (item.indent) * (1 / (parent_indnet * 2));
-    --                     end,
-    --                     marker_minus = {
-    --                         add_padding = function(_, item)
-    --                             return item.indent > 1;
-    --                         end
-    --                     }
-    --                 },
-    --                 headings = presets.headings.glow,
-    --                 block_quotes = {
-    --                     enable = true,
-    --                     wrap = true,
-    --
-    --                     default = {
-    --                         border = "▋", hl = "MarkviewBlockQuoteDefault"
-    --                     },
-    --
-    --                     ["INPROGRESS"] = {
-    --                         hl = "MarkviewBlockQuoteNote",
-    --                         preview = "󰲽 In Progress",
-    --
-    --                         title = true,
-    --                         icon = "󰲽",
-    --
-    --                         border = "▋"
-    --                     },
-    --                     ["REVIEW"] = {
-    --                         hl = "MarkviewBlockQuoteWarn",
-    --                         preview = " Review",
-    --
-    --                         title = true,
-    --                         icon = "",
-    --
-    --                         border = "▋"
-    --                     },
-    --                     ["TESTING"] = {
-    --                         hl = "MarkviewBlockQuoteSpecial",
-    --                         preview = "󰙨 Testing",
-    --
-    --                         title = true,
-    --                         icon = "󰙨",
-    --
-    --                         border = "▋"
-    --                     },
-    --                 }
-    --             },
-    --             preview = {
-    --                 icon_provider = "devicons"
-    --             },
-    --         })
-    --     end,
-    -- },
-    -- {
-    --     'stevearc/quicker.nvim',
-    --     event = "FileType qf",
-    --     ---@module "quicker"
-    --     ---@type quicker.SetupOptions
-    --     opts = {},
-    -- },
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
         cmd = "Trouble",
-        keys = {
+       keys = {
             {
                 "<leader>xx",
                 "<cmd>Trouble diagnostics toggle<cr>",
@@ -278,4 +188,12 @@ return {
             require('ufo').setup()
         end
     },
+    {
+        "kylechui/nvim-surround",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+            })
+        end
+    }
 }

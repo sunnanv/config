@@ -38,19 +38,6 @@ return {
                     vim.keymap.set({ "n", "x" }, "<leader>f", format)
                 end,
             })
-            vim.lsp.config('ts_ls', {
-                init_options = {
-                    plugins = {
-                        {
-                            name = "@vue/typescript-plugin",
-                            location =
-                            "/Users/johannes.sunnanvader/.nvm/versions/node/v22.15.1/lib/node_modules/@vue/typescript-plugin",
-                            languages = { "javascript", "typescript", "vue" },
-                        },
-                    },
-                },
-                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-            })
             vim.lsp.config('stylelint_lsp', {
                 settings = {
                     stylelintplus = {
