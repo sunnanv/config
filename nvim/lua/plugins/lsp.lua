@@ -12,6 +12,16 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = "VeryLazy",
+        init = function()
+            local make_client_capabilities = vim.lsp.protocol.make_client_capabilities
+            function vim.lsp.protocol.make_client_capabilities()
+                local caps = make_client_capabilities()
+                if caps.workspace then
+                    caps.workspace.didChangeWatchedFiles = nil
+                end
+                return caps
+            end
+        end,
         config = function()
             vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>")
             vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")

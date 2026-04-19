@@ -16,3 +16,22 @@ vim.api.nvim_set_keymap('n', '<A-h>', '<C-w>h', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<A-j>', '<C-w>j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-l>', '<C-w>l', { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command('QfSave', function(opts)
+    local qflist = vim.fn.getqflist()
+    local lines = {}
+
+    for _, item in ipairs(qflist) do
+        local bufname = vim.fn.bufname(item.bufnr)
+        local line = string.format('%s:%d:%d: %s', bufname, item.lnum, item.col, item.text)
+        table.insert(lines, line)
+    end
+
+    vim.fn.writefile(lines, opts.args)
+end, { nargs = 1 })
+
+vim.api.nvim_create_user_command('QfLoad', function(opts)
+    vim.cmd('cfile ' .. opts.args)
+end, { nargs = 1 })
+
+vim.api.nvim_set_keymap('n', '<c-/>', '/<C-r><C-w><CR>', { noremap = true, silent = true })
