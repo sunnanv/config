@@ -46,12 +46,13 @@ return {
                     wrap_goto = true,
                 }
             })
-            require('mini.jump2d').setup()
-            require('mini.jump').setup({
-                mappings = {
-                    repeat_jump = "'"
-                }
-            })
+            -- require('mini.jump2d').setup()
+            -- require('mini.jump').setup({
+            --     mappings = {
+            --         repeat_jump = "'"
+            --     }
+            -- })
+            require('mini.animate').setup({})
         end,
     },
     {

@@ -1,4 +1,22 @@
 return {
+    {
+        "EdenEast/nightfox.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            groups = {
+                nordfox = {
+                    -- slightly brighten comments & UI
+                    Comment = { fg = "#7a8599" },
+                    LineNr  = { fg = "#6b758e" },
+                },
+            },
+        },
+        config = function(_, opts)
+            require("nightfox").setup(opts)
+            vim.cmd("colorscheme nordfox")
+        end,
+    },
     -- {
     --     "folke/tokyonight.nvim",
     --     priority = 1000,
@@ -9,27 +27,27 @@ return {
     --         -- vim.cmd [[colorscheme tokyonight]]
     --     end,
     -- },
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000,
-        opts = {
-            integrations = {
-                neotest = true,
-                blink_cmp = true,
-                harpoon = true,
-                noice = true,
-                snacks = {
-                    enabled = true,
-                },
-                lsp_trouble = true,
-                which_key = true,
-            },
-        },
-        init = function()
-            vim.cmd.colorscheme "catppuccin-frappe"
-        end
-    },
+    -- {
+    --     "catppuccin/nvim",
+    --     name = "catppuccin",
+    --     priority = 1000,
+    --     opts = {
+    --         integrations = {
+    --             neotest = true,
+    --             blink_cmp = true,
+    --             harpoon = true,
+    --             noice = true,
+    --             snacks = {
+    --                 enabled = true,
+    --             },
+    --             lsp_trouble = true,
+    --             which_key = true,
+    --         },
+    --     },
+    --     init = function()
+    --         -- vim.cmd.colorscheme "catppuccin-frappe"
+    --     end
+    -- },
     {
         "nvim-lualine/lualine.nvim",
         dependencies = {
