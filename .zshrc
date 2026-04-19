@@ -161,3 +161,8 @@ export EDITOR='nvim'
 export PATH="$PATH:/Users/johannes.sunnanvader/.local/bin"
 
 source ~/.keys
+
+alias setup-worktree='/Users/johannes.sunnanvader/code/worktree-dash/setup-worktree.sh'
+alias remove-worktree='/Users/johannes.sunnanvader/code/worktree-dash/remove-worktree.sh'
+
+source "/Users/johannes.sunnanvader/.local/share/bob/env/env.sh"

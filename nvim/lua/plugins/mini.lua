@@ -45,11 +45,7 @@ return {
                     wrap_goto = true,
                 }
             })
+
         end,
     },
-    {
-        'numToStr/Comment.nvim',
-        opts = {
-        }
-    }
 }

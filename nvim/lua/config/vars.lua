@@ -10,3 +10,4 @@ vim.g["floaterm_autoclose"] = 0
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+g.mapleader = ' '
