@@ -85,6 +85,11 @@ plugins=(
     alias-finder
 )
 # autoenv
+
+# Prefer zsh-native _git completion (recent commits for --fixup=) over
+# Homebrew git's _git wrapper (which completes branches/refs).
+fpath=(/usr/share/zsh/${ZSH_VERSION}/functions $fpath)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -127,6 +132,9 @@ alias ghpr='gh pr view -w || gh pr create -w'
 # export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# fzf-git
+[ -f ~/.fzf-git.sh ] && source ~/.fzf-git.sh
 
 # pnpm
 # export PNPM_HOME="/Users/johannessunnanvader/Library/pnpm"

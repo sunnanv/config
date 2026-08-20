@@ -108,4 +108,45 @@ return {
 			})
 		end,
 	},
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+		-- Completion for `blink.cmp`
+		dependencies = { "saghen/blink.cmp" },
+		opts = {
+			markdown = {
+				list_items = {
+					shift_width = function(buffer, item)
+						--- Reduces the `indent` by 1 level.
+						---
+						---         indent                      1
+						--- ------------------------- = 1 ÷ --------- = new_indent
+						--- indent * (1 / new_indent)       new_indent
+						---
+						local parent_indnet = math.max(1, item.indent - vim.bo[buffer].shiftwidth)
+
+						return item.indent * (1 / (parent_indnet * 2))
+					end,
+					marker_minus = {
+						add_padding = function(_, item)
+							return item.indent > 1
+						end,
+					},
+				},
+			},
+		},
+	},
+	{
+		"selimacerbas/markdown-preview.nvim",
+		dependencies = { "selimacerbas/live-server.nvim" },
+		config = function()
+			require("markdown_preview").setup({
+				-- all optional; sane defaults shown
+				instance_mode = "takeover", -- "takeover" (one tab) or "multi" (tab per instance)
+				port = 0, -- 0 = auto (8421 for takeover, OS-assigned for multi)
+				open_browser = true,
+				debounce_ms = 300,
+			})
+		end,
+	},
 }

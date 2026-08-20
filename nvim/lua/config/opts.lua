@@ -44,3 +44,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.opt.swapfile = false
 
 vim.opt.laststatus = 3
+
+vim.cmd([[
+  let &t_TI = ""
+  let &t_TE = ""
+]])
