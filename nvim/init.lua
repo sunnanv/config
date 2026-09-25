@@ -5,3 +5,5 @@ require('config.autocmds')
 
 
 require('config.lazy')
+
+require('notes').setup()

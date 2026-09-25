@@ -174,3 +174,6 @@ alias setup-worktree='/Users/johannes.sunnanvader/code/worktree-dash/setup-workt
 alias remove-worktree='/Users/johannes.sunnanvader/code/worktree-dash/remove-worktree.sh'
 
 source "/Users/johannes.sunnanvader/.local/share/bob/env/env.sh"
+
+# Added by the Hunk installer (https://hunk.dev)
+export PATH='/Users/johannes.sunnanvader/.hunk/bin':"$PATH"

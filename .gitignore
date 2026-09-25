@@ -4,3 +4,4 @@ nvim/plugin
 .DS_Store
 .local-history
 Session.vim
+__pycache__/

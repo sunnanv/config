@@ -24,6 +24,7 @@ if ! [ -x "$(command -v nvim)" ] || [ $OVERRIDE ]; then
 	ln -fs "$CURRENT_DIR/nvim/lua" "$HOME/.config/nvim/lua"
 	ln -fs "$CURRENT_DIR/nvim/after" "$HOME/.config/nvim/after"
 	ln -fs "$CURRENT_DIR/nvim/lazy-lock.json" "$HOME/.config/nvim/lazy-lock.json"
+	ln -fs "$CURRENT_DIR/nvim/scripts" "$HOME/.config/nvim/scripts"
 else
 	echo "Neovim already installed, skipping"
 fi
